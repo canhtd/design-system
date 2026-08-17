@@ -14,6 +14,8 @@ struct MetricList: View {
          ("switcherHeight", EdenMetric.switcherHeight),
          ("iconSlot", EdenMetric.iconSlot),
          ("navGlyph", EdenMetric.navGlyph),
+         ("mono18", EdenMetric.mono18),
+         ("childRowHeight", EdenMetric.childRowHeight),
          ("libraryMaxWidth", EdenMetric.libraryMaxWidth),
          ("libraryPaddingH", EdenMetric.libraryPaddingH),
          ("libraryPaddingTop", EdenMetric.libraryPaddingTop),
@@ -64,12 +66,41 @@ struct ComponentRow: View {
         HStack(spacing: 20) {
             EdenKbd(keys: ["⌘", "K"])
             EdenMonogram(text: "Principle")
+            EdenMonogram(text: "Vessa", size: .mono18)
             EdenFilterChip(title: "All", symbol: "square.grid.2x2", isActive: true)
             EdenFilterChip(title: "Type", symbol: "doc", chevron: true)
             EdenSegmented(titles: ["Grid", "List", "Creators"], selected: 0)
             EdenViewModes(symbols: ["square.grid.2x2", "point.3.connected.trianglepath.dotted", "list.bullet"],
                           selected: 0)
         }
+    }
+}
+
+/// The sidebar's child rows: h28, r10, 14/400 `n600`, hung off a 1 px
+/// `guideRail`. There is no `EdenSidebarRow` control in the package yet, so
+/// this is the gallery showing what the metrics add up to.
+struct ChildRowSample: View {
+    private let titles = ["Today", "This week", "Archive"]
+
+    var body: some View {
+        HStack(alignment: .top, spacing: 10) {
+            EdenColor.guideRail.frame(width: 1)
+            VStack(alignment: .leading, spacing: 2) {
+                ForEach(titles, id: \.self) { title in
+                    Text(title)
+                        .font(EdenFont.ui(14))
+                        .foregroundStyle(EdenColor.n600)
+                        .padding(.horizontal, 10)
+                        .frame(height: EdenMetric.childRowHeight, alignment: .leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .background(title == titles.first ? EdenColor.black(4) : .clear,
+                                    in: .rect(cornerRadius: EdenRadius.childRow, style: .continuous))
+                }
+            }
+        }
+        .padding(12)
+        .frame(width: 200)
+        .background(EdenColor.sidebar, in: .rect(cornerRadius: EdenRadius.md, style: .continuous))
     }
 }
 
@@ -80,6 +111,13 @@ struct SurfaceRow: View {
             surface("edenFloatShadow", fill: EdenColor.white(80)) { $0.edenFloatShadow() }
             surface("edenBorder(hairline)", fill: EdenColor.card) {
                 $0.edenBorder(EdenColor.hairline, radius: EdenRadius.card)
+            }
+            // The wash belongs behind a content canvas, so it is shown on one.
+            surface("EdenPageGradient", fill: EdenColor.canvas) {
+                $0.overlay(
+                    EdenPageGradient()
+                        .clipShape(RoundedRectangle(cornerRadius: EdenRadius.card, style: .continuous))
+                )
             }
         }
     }

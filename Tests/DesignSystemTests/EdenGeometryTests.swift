@@ -10,7 +10,9 @@ import XCTest
 final class EdenGeometryTests: XCTestCase {
     /// Eden overrides Tailwind: `lg` (18) is bigger than `xl`/`md` (12).
     func testRadiiMatchDocs() {
+        XCTAssertEqual(EdenRadius.mono, 5)
         XCTAssertEqual(EdenRadius.sm, 8)
+        XCTAssertEqual(EdenRadius.childRow, 10)
         XCTAssertEqual(EdenRadius.md, 12)
         XCTAssertEqual(EdenRadius.card, 16)
         XCTAssertEqual(EdenRadius.lg, 18)
@@ -25,6 +27,17 @@ final class EdenGeometryTests: XCTestCase {
         XCTAssertEqual(EdenMetric.sidebarContent, 234)
         XCTAssertEqual(EdenMetric.rowHeight, 30)
         XCTAssertEqual(EdenMetric.iconSlot, 20)
+    }
+
+    /// A child row is shorter than the nav row it hangs under, and the small
+    /// monogram is smaller than the switcher's icon slot. If either inverts,
+    /// the sidebar hierarchy stops reading.
+    func testSidebarChildAndMonogramMetrics() {
+        XCTAssertEqual(EdenMetric.childRowHeight, 28)
+        XCTAssertEqual(EdenMetric.mono18, 18)
+        XCTAssertLessThan(EdenMetric.childRowHeight, EdenMetric.rowHeight)
+        XCTAssertLessThan(EdenMetric.mono18, EdenMetric.iconSlot)
+        XCTAssertLessThan(EdenRadius.mono, EdenRadius.childRow)
     }
 
     func testLibraryMetricsMatchDocs() {

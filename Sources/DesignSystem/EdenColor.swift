@@ -31,8 +31,17 @@ public enum EdenColor {
     /// `--color-button-primary-default-background`.
     public static let primary80 = hex(0x224735)
     public static let olive = hex(0x39624D)
+    /// The hover fill of the primary action — `primary80` lifted one step.
+    public static let primaryHover = hex(0x375847)
+    /// `primary` at 9% — the wash behind a monogram, never a text colour.
+    public static let primaryTint = primary.opacity(0.09)
     /// `#E0E0E0` — the border Eden's floating chrome and modals use.
     public static let hairline = hex(0xE0E0E0)
+
+    // MARK: Rules
+    /// The 1 px vertical rail drawn beside a sidebar group's child rows.
+    /// `black/9%`, so it reads on `sidebar` without becoming a border.
+    public static let guideRail = Color.black.opacity(0.09)
 
     /// Cards, pills and modals are painted with alpha-on-black rather than the
     /// neutral ramp; `black(6)` reads as Tailwind's `black/[0.06]`.

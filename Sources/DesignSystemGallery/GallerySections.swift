@@ -19,8 +19,11 @@ struct ColourGrid: View {
          ("primary", EdenColor.primary),
          ("primary5", EdenColor.primary5),
          ("primary80", EdenColor.primary80),
+         ("primaryHover", EdenColor.primaryHover),
+         ("primaryTint", EdenColor.primaryTint),
          ("olive", EdenColor.olive),
-         ("hairline", EdenColor.hairline)]
+         ("hairline", EdenColor.hairline),
+         ("guideRail", EdenColor.guideRail)]
     }
 
     var body: some View {
@@ -39,12 +42,16 @@ struct ColourGrid: View {
     }
 
     /// The label is read back off the token so it cannot drift from the value.
+    /// Translucent tokens carry their alpha, or they would read as solid black.
     private func hexLabel(of colour: Color) -> String {
         guard let srgb = NSColor(colour).usingColorSpace(.sRGB) else { return "—" }
-        return String(format: "#%02x%02x%02x",
-                      Int(round(srgb.redComponent * 255)),
-                      Int(round(srgb.greenComponent * 255)),
-                      Int(round(srgb.blueComponent * 255)))
+        let hex = String(format: "#%02x%02x%02x",
+                         Int(round(srgb.redComponent * 255)),
+                         Int(round(srgb.greenComponent * 255)),
+                         Int(round(srgb.blueComponent * 255)))
+        let alpha = Double(srgb.alphaComponent)
+        guard alpha < 0.999 else { return hex }
+        return hex + String(format: " · %g%%", (alpha * 1000).rounded() / 10)
     }
 }
 
@@ -124,7 +131,8 @@ struct TypeScale: View {
 
 struct RadiusRow: View {
     private var radii: [(String, CGFloat)] {
-        [("sm", EdenRadius.sm), ("md", EdenRadius.md), ("card", EdenRadius.card),
+        [("mono", EdenRadius.mono), ("sm", EdenRadius.sm), ("childRow", EdenRadius.childRow),
+         ("md", EdenRadius.md), ("card", EdenRadius.card),
          ("lg", EdenRadius.lg), ("modal", EdenRadius.modal)]
     }
 

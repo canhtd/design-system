@@ -23,21 +23,42 @@ public struct EdenKbd: View {
     }
 }
 
-/// A Project's initial in the switcher: 20 pt square, r6, `black/6%`, 10/600.
+/// A name reduced to its first letter on a tinted square.
 public struct EdenMonogram: View {
-    public let text: String
+    /// The two squares Eden draws. They differ in more than size — casing and
+    /// fill are part of the variant, so a caller only picks the slot.
+    public enum Size {
+        /// The Project switcher: 20 pt square, r6, `black/6%`, 10/600 `n700`,
+        /// initial in caps.
+        case switcher20
+        /// The small monogram: 18 pt square, `EdenRadius.mono`, `primaryTint`
+        /// behind 9.5/600 `primary`, initial in lower case.
+        case mono18
 
-    public init(text: String) {
+        var side: CGFloat { self == .mono18 ? EdenMetric.mono18 : EdenMetric.iconSlot }
+        var radius: CGFloat { self == .mono18 ? EdenRadius.mono : 6 }
+        var font: Font { EdenFont.ui(self == .mono18 ? 9.5 : 10, .semibold) }
+        var foreground: Color { self == .mono18 ? EdenColor.primary : EdenColor.n700 }
+        var fill: Color { self == .mono18 ? EdenColor.primaryTint : EdenColor.black(6) }
+    }
+
+    public let text: String
+    public let size: Size
+
+    public init(text: String, size: Size = .switcher20) {
         self.text = text
+        self.size = size
     }
 
     public var body: some View {
-        Text(text.prefix(1).uppercased())
-            .font(EdenFont.ui(10, .semibold))
-            .foregroundStyle(EdenColor.n700)
-            .frame(width: EdenMetric.iconSlot, height: EdenMetric.iconSlot)
-            .background(EdenColor.black(6), in: .rect(cornerRadius: 6))
+        Text(size == .mono18 ? initial.lowercased() : initial.uppercased())
+            .font(size.font)
+            .foregroundStyle(size.foreground)
+            .frame(width: size.side, height: size.side)
+            .background(size.fill, in: .rect(cornerRadius: size.radius))
     }
+
+    private var initial: String { String(text.prefix(1)) }
 }
 
 /// A Library filter chip. Presentational only — the host app owns filtering.

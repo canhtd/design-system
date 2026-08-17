@@ -20,24 +20,25 @@ extension View {
     }
 }
 
-/// `--background-page-gradient`: two very faint radial washes multiplied over
-/// the canvas. Subtle, but it is what stops Eden's background reading as flat.
+/// `--background-page-gradient`: two very faint elliptical washes multiplied
+/// over the canvas. Subtle, but it is what stops Eden's background reading as
+/// flat. This is the one definition of the wash — an app that wants it uses
+/// this view rather than spelling a gradient of its own.
 ///
-/// The washes are 5.5% / 3% here, where `eden-tokens.md` §4 records 8% / 4% on
-/// the web app. This is VessaStudio's tuned value, carried over verbatim so the
-/// package renders exactly as its screens already do; reconciling the two is a
-/// question for the docs, not a thing to silently change here.
+/// The measured Eden doc says 8%/4%; 5.5%/3% is the tuned value, the one
+/// checked against the real app, so it is what ships. Apply the gradient
+/// behind the content canvas only, not behind the floating sidebar panel.
 public struct EdenPageGradient: View {
     public init() {}
 
     public var body: some View {
         ZStack {
-            RadialGradient(colors: [EdenColor.black(5.5), .clear],
-                           center: UnitPoint(x: 0.08, y: -0.1),
-                           startRadius: 0, endRadius: 900)
-            RadialGradient(colors: [EdenColor.black(3), .clear],
-                           center: UnitPoint(x: 1.05, y: 1.08),
-                           startRadius: 0, endRadius: 700)
+            EllipticalGradient(colors: [EdenColor.black(5.5), .clear],
+                               center: UnitPoint(x: 0.08, y: -0.1),
+                               endRadiusFraction: 0.72)
+            EllipticalGradient(colors: [EdenColor.black(3), .clear],
+                               center: UnitPoint(x: 1.05, y: 1.08),
+                               endRadiusFraction: 0.54)
         }
         .blendMode(.multiply)
         .allowsHitTesting(false)

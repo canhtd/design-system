@@ -22,6 +22,12 @@ public enum EdenMetric {
     /// Sidebar nav icon slot (glyph inside it is ~17).
     public static let iconSlot: CGFloat = 20
     public static let navGlyph: CGFloat = 17
+    /// The small monogram square: 18 pt, `EdenRadius.mono`, `primaryTint`
+    /// behind 9.5/600 `primary` — see `EdenMonogram.Size.mono18`.
+    public static let mono18: CGFloat = 18
+    /// A child row under a sidebar group, beside `EdenColor.guideRail`:
+    /// h28, `EdenRadius.childRow`, 14/400 in `EdenColor.n600`.
+    public static let childRowHeight: CGFloat = 28
 
     /// Library container: `max-w-[1640px] px-12 pt-5 pb-16`.
     public static let libraryMaxWidth: CGFloat = 1640

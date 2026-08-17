@@ -30,6 +30,7 @@ public struct EdenTokenGallery: View {
             GallerySection("Metrics") { MetricList() }
             GallerySection("Controls") { ControlRow() }
             GallerySection("Components") { ComponentRow() }
+            GallerySection("Sidebar child rows") { ChildRowSample() }
             GallerySection("Surfaces") { SurfaceRow() }
         }
         .padding(32)

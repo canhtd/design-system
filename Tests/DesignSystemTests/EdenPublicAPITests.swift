@@ -15,6 +15,8 @@ final class EdenPublicAPITests: XCTestCase {
     func testComponentsAreConstructableFromOutsideTheModule() {
         _ = EdenKbd(keys: ["⌘", "K"])
         _ = EdenMonogram(text: "Principle")
+        _ = EdenMonogram(text: "Vessa", size: .mono18)
+        _ = EdenMonogram(text: "Vessa", size: .switcher20)
         _ = EdenFilterChip(title: "All", symbol: "square.grid.2x2", isActive: true)
         _ = EdenSegmented(titles: ["Grid", "List"], selected: 0)
         _ = EdenViewModes(symbols: ["square.grid.2x2"], selected: 0)

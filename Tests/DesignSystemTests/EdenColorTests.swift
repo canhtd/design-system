@@ -20,8 +20,18 @@ final class EdenColorTests: XCTestCase {
         assertHex(EdenColor.primary, 0x09321F)
         assertHex(EdenColor.primary5, 0xEFF2EE)
         assertHex(EdenColor.primary80, 0x224735)
+        assertHex(EdenColor.primaryHover, 0x375847)
         assertHex(EdenColor.olive, 0x39624D)
         assertHex(EdenColor.hairline, 0xE0E0E0)
+    }
+
+    /// The two translucent tokens: the hue is the token they are drawn from,
+    /// the alpha is the whole point of them.
+    func testTranslucentTokensCarryTheirAlpha() {
+        assertHex(EdenColor.primaryTint, 0x09321F)
+        XCTAssertEqual(alpha(of: EdenColor.primaryTint), 0.09, accuracy: 0.001)
+        assertHex(EdenColor.guideRail, 0x000000)
+        XCTAssertEqual(alpha(of: EdenColor.guideRail), 0.09, accuracy: 0.001)
     }
 
     func testNeutralRampMatchesDocs() {
