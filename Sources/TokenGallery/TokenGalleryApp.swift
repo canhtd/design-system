@@ -1,5 +1,5 @@
 import AppKit
-import DesignSystem
+import DesignSystemGallery
 import SwiftUI
 
 /// Thin host for `EdenTokenGallery` — `swift run TokenGallery`.

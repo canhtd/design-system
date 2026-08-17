@@ -56,10 +56,10 @@ public struct EdenFilterChip: View {
 
     public var body: some View {
         HStack(spacing: 6) {
-            Image(systemName: symbol).font(.system(size: 13))
+            Image(systemName: symbol).font(EdenFont.ui(13))
             Text(title).font(EdenFont.ui(11.5, .medium))
             if chevron {
-                Image(systemName: "chevron.down").font(.system(size: 9)).opacity(0.7)
+                Image(systemName: "chevron.down").font(EdenFont.ui(9)).opacity(0.7)
             }
         }
         .foregroundStyle(isActive ? EdenColor.n900 : EdenColor.n500)
@@ -113,7 +113,7 @@ public struct EdenViewModes: View {
         HStack(spacing: 2) {
             ForEach(Array(symbols.enumerated()), id: \.offset) { index, symbol in
                 Image(systemName: symbol)
-                    .font(.system(size: 14))
+                    .font(EdenFont.ui(14))
                     .foregroundStyle(index == selected ? EdenColor.n800 : EdenColor.n400)
                     .frame(width: 28, height: 24)
                     .background(index == selected ? Color.white : .clear, in: .capsule)

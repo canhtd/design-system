@@ -1,11 +1,10 @@
 import AppKit
-import DesignSystem
+import DesignSystemGallery
 import SwiftUI
 import XCTest
 
 /// The gallery is the human-facing proof that the tokens are right, so it has
-/// to actually draw — compiling is not enough. Set `EDEN_GALLERY_SNAPSHOT` to a
-/// file path to keep the rendered PNG for eyeballing.
+/// to actually draw — compiling is not enough.
 @MainActor
 final class EdenGalleryRenderTests: XCTestCase {
     func testGalleryRendersRealPixels() throws {
@@ -32,10 +31,5 @@ final class EdenGalleryRenderTests: XCTestCase {
             }
         }
         XCTAssertGreaterThan(distinct.count, 20, "the gallery rendered a flat image")
-
-        if let path = ProcessInfo.processInfo.environment["EDEN_GALLERY_SNAPSHOT"],
-           let png = bitmap.representation(using: .png, properties: [:]) {
-            try png.write(to: URL(fileURLWithPath: path))
-        }
     }
 }

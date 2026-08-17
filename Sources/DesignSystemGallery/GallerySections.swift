@@ -1,39 +1,50 @@
+import AppKit
+import DesignSystem
 import SwiftUI
 
 struct ColourGrid: View {
-    private var swatches: [(String, Color, String)] {
-        [("canvas", EdenColor.canvas, "#fafaf8"),
-         ("sidebar", EdenColor.sidebar, "#f4f3ee"),
-         ("card", EdenColor.card, "#ffffff"),
-         ("textPrimary", EdenColor.textPrimary, "#272523"),
-         ("n900", EdenColor.n900, "#171717"),
-         ("n800", EdenColor.n800, "#262626"),
-         ("n700", EdenColor.n700, "#404040"),
-         ("n600", EdenColor.n600, "#525252"),
-         ("n500", EdenColor.n500, "#737373"),
-         ("n400", EdenColor.n400, "#a1a1a1"),
-         ("n300", EdenColor.n300, "#d4d4d4"),
-         ("n200", EdenColor.n200, "#e5e5e5"),
-         ("primary", EdenColor.primary, "#09321f"),
-         ("primary5", EdenColor.primary5, "#eff2ee"),
-         ("primary80", EdenColor.primary80, "#224735"),
-         ("olive", EdenColor.olive, "#39624d"),
-         ("hairline", EdenColor.hairline, "#e0e0e0")]
+    private var swatches: [(String, Color)] {
+        [("canvas", EdenColor.canvas),
+         ("sidebar", EdenColor.sidebar),
+         ("card", EdenColor.card),
+         ("textPrimary", EdenColor.textPrimary),
+         ("n900", EdenColor.n900),
+         ("n800", EdenColor.n800),
+         ("n700", EdenColor.n700),
+         ("n600", EdenColor.n600),
+         ("n500", EdenColor.n500),
+         ("n400", EdenColor.n400),
+         ("n300", EdenColor.n300),
+         ("n200", EdenColor.n200),
+         ("primary", EdenColor.primary),
+         ("primary5", EdenColor.primary5),
+         ("primary80", EdenColor.primary80),
+         ("olive", EdenColor.olive),
+         ("hairline", EdenColor.hairline)]
     }
 
     var body: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 150), spacing: 12)], spacing: 12) {
-            ForEach(swatches, id: \.0) { name, colour, hex in
+            ForEach(swatches, id: \.0) { name, colour in
                 VStack(alignment: .leading, spacing: 6) {
                     RoundedRectangle(cornerRadius: EdenRadius.md, style: .continuous)
                         .fill(colour)
                         .frame(height: 48)
                         .edenBorder(EdenColor.black(10), radius: EdenRadius.md)
                     Text(name).font(EdenFont.ui(12, .medium)).foregroundStyle(EdenColor.n800)
-                    Text(hex).font(EdenFont.ui(11)).foregroundStyle(EdenColor.n400)
+                    Text(hexLabel(of: colour)).font(EdenFont.ui(11)).foregroundStyle(EdenColor.n400)
                 }
             }
         }
+    }
+
+    /// The label is read back off the token so it cannot drift from the value.
+    private func hexLabel(of colour: Color) -> String {
+        guard let srgb = NSColor(colour).usingColorSpace(.sRGB) else { return "—" }
+        return String(format: "#%02x%02x%02x",
+                      Int(round(srgb.redComponent * 255)),
+                      Int(round(srgb.greenComponent * 255)),
+                      Int(round(srgb.blueComponent * 255)))
     }
 }
 

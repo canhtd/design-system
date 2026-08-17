@@ -22,6 +22,11 @@ extension View {
 
 /// `--background-page-gradient`: two very faint radial washes multiplied over
 /// the canvas. Subtle, but it is what stops Eden's background reading as flat.
+///
+/// The washes are 5.5% / 3% here, where `eden-tokens.md` §4 records 8% / 4% on
+/// the web app. This is VessaStudio's tuned value, carried over verbatim so the
+/// package renders exactly as its screens already do; reconciling the two is a
+/// question for the docs, not a thing to silently change here.
 public struct EdenPageGradient: View {
     public init() {}
 

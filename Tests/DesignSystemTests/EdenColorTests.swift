@@ -3,9 +3,11 @@ import DesignSystem
 import SwiftUI
 import XCTest
 
-/// Spot-checks against `docs/design/eden-tokens.md` in the VessaStudio repo.
-/// If one of these fails, either the docs changed or a token drifted — fix the
-/// token, never the test's expectation.
+/// Spot-checks against `docs/design/eden-tokens.md` in the VessaStudio repo,
+/// falling back to VessaStudio's EdenTokens.swift at beb0f21 for the two
+/// neutrals the docs' tables don't spell out (n300, n200). If one of these
+/// fails, either a token drifted or the docs moved — fix the token, never the
+/// test's expectation.
 @MainActor
 final class EdenColorTests: XCTestCase {
     func testSurfaceTokensMatchDocs() {

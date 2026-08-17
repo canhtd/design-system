@@ -38,17 +38,19 @@ public struct EdenGhostButtonStyle: ButtonStyle {
 
     struct GhostLabel: View {
         let configuration: Configuration
+        @Environment(\.isEnabled) private var isEnabled
         @State private var hovering = false
 
         var body: some View {
+            let highlighted = hovering && isEnabled
             configuration.label
                 .font(EdenFont.ui(12.5, .medium))
-                .foregroundStyle(hovering ? EdenColor.n900 : EdenColor.n600)
+                .foregroundStyle(highlighted ? EdenColor.n900 : EdenColor.n600)
                 .padding(.horizontal, 14)
                 .frame(height: EdenMetric.modalButtonHeight)
-                .background(hovering ? EdenColor.black(4) : .clear,
+                .background(highlighted ? EdenColor.black(4) : .clear,
                             in: .rect(cornerRadius: EdenRadius.lg, style: .continuous))
-                .opacity(configuration.isPressed ? 0.75 : 1)
+                .opacity(isEnabled ? (configuration.isPressed ? 0.75 : 1) : 0.4)
                 .onHover { hovering = $0 }
         }
     }
