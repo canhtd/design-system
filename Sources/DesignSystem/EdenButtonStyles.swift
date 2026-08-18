@@ -30,6 +30,10 @@ public struct EdenPillButtonStyle: ButtonStyle {
 
 /// The committing action inside a popover — `Pull now`. Shorter than a modal's
 /// button and fully rounded: h28, r=full, `primary80` under `primary5`.
+///
+/// Disabled or busy it fades to 0.75, never further: at 0.4 the label and the
+/// fill wash to the same grey and the button stops saying what it is
+/// (`proto .pull-now.is-busy{opacity:.75}`).
 public struct EdenSmallPrimaryButtonStyle: ButtonStyle {
     public init() {}
 
@@ -48,7 +52,7 @@ public struct EdenSmallPrimaryButtonStyle: ButtonStyle {
                 .padding(.horizontal, 12)
                 .frame(height: EdenMetric.smallPillHeight)
                 .background(EdenColor.primary80, in: .capsule)
-                .opacity(isEnabled ? (configuration.isPressed ? 0.85 : 1) : 0.4)
+                .opacity(isEnabled ? (configuration.isPressed ? 0.85 : 1) : 0.75)
         }
     }
 }

@@ -9,6 +9,9 @@ import SwiftUI
 /// host app decides where it hangs and what closes it, and a system popover
 /// would bring back both the tail and a translucent ground.
 public struct EdenPopover<Content: View>: View {
+    /// The panel's own width, padding and border included — Eden sizes its
+    /// popovers `box-sizing: border-box`, so `.pop--trash{width:280px}` is
+    /// 280 pt of panel, not 280 pt of rows inside 4 pt of padding.
     public let width: CGFloat
     @ViewBuilder public var content: Content
 
@@ -19,8 +22,8 @@ public struct EdenPopover<Content: View>: View {
 
     public var body: some View {
         VStack(alignment: .leading, spacing: 0) { content }
-            .frame(width: width, alignment: .leading)
             .padding(EdenMetric.popoverPadding)
+            .frame(width: width, alignment: .leading)
             .background(EdenColor.card,
                         in: .rect(cornerRadius: EdenRadius.md, style: .continuous))
             .edenBorder(EdenColor.hairline, radius: EdenRadius.md)
