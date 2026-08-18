@@ -10,22 +10,27 @@ final class EdenPublicAPITests: XCTestCase {
         _ = Button("New") {}.buttonStyle(EdenPillButtonStyle())
         _ = Button("Cancel") {}.buttonStyle(EdenGhostButtonStyle())
         _ = Button("Create") {}.buttonStyle(EdenPrimaryButtonStyle())
+        _ = Button("Pull now") {}.buttonStyle(EdenSmallPrimaryButtonStyle())
+        _ = Button("Edit hashtags") {}.buttonStyle(EdenSmallPillButtonStyle())
     }
 
     func testComponentsAreConstructableFromOutsideTheModule() {
         _ = EdenKbd(keys: ["⌘", "K"])
         _ = EdenMonogram(text: "Principle")
         _ = EdenMonogram(text: "Vessa", size: .mono18)
-        _ = EdenMonogram(text: "Vessa", size: .switcher20)
-        _ = EdenFilterChip(title: "All", symbol: "square.grid.2x2", isActive: true)
+        _ = EdenMonogram(text: "Vessa", size: .mono20)
+        _ = EdenFilterChip(title: "All", icon: .layoutGrid, isActive: true)
         _ = EdenSegmented(titles: ["Grid", "List"], selected: 0)
-        _ = EdenViewModes(symbols: ["square.grid.2x2"], selected: 0)
         _ = EdenPageGradient()
+        _ = EdenIconView(.sparkles, size: EdenIconSize.pageMark)
+        _ = EdenPopover(width: 336) { EdenPopoverHeader("Daily pull") }
     }
 
     func testViewModifiersAreVisibleFromOutsideTheModule() {
         _ = Color.clear.edenPanelShadow()
         _ = Color.clear.edenFloatShadow()
         _ = Color.clear.edenBorder(EdenColor.hairline, radius: EdenRadius.card)
+        _ = Color.clear.edenPaneSurface()
+        _ = Text("All items").edenText(EdenType.pageTitle)
     }
 }

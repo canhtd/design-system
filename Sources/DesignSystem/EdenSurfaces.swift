@@ -11,6 +11,14 @@ extension View {
         shadow(color: EdenColor.black(opacity), radius: 30, y: 22)
     }
 
+    /// The inset card a Board, a Chat or a split column sits on: r12, a 1 pt
+    /// `black(6)` edge, and its content clipped to that shape (`proto .pane`).
+    /// The gap around it belongs to the container, not to the pane.
+    public func edenPaneSurface() -> some View {
+        clipShape(.rect(cornerRadius: EdenRadius.md, style: .continuous))
+            .edenBorder(EdenColor.black(6), radius: EdenRadius.md)
+    }
+
     /// A 1 pt inside border, the way CSS `border` paints it.
     public func edenBorder(_ colour: Color, radius: CGFloat, width: CGFloat = 1) -> some View {
         overlay(

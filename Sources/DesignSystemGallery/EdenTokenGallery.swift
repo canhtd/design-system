@@ -30,6 +30,7 @@ public struct EdenTokenGallery: View {
             GallerySection("Metrics") { MetricList() }
             GallerySection("Controls") { ControlRow() }
             GallerySection("Components") { ComponentRow() }
+            GallerySection("Icons — Tabler, 24 grid, stroke 1.7") { IconSheet() }
             GallerySection("Sidebar child rows") { ChildRowSample() }
             GallerySection("Surfaces") { SurfaceRow() }
         }

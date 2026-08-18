@@ -10,6 +10,7 @@ import XCTest
 final class EdenGeometryTests: XCTestCase {
     /// Eden overrides Tailwind: `lg` (18) is bigger than `xl`/`md` (12).
     func testRadiiMatchDocs() {
+        XCTAssertEqual(EdenRadius.xs, 6)
         XCTAssertEqual(EdenRadius.mono, 5)
         XCTAssertEqual(EdenRadius.sm, 8)
         XCTAssertEqual(EdenRadius.childRow, 10)
@@ -48,10 +49,11 @@ final class EdenGeometryTests: XCTestCase {
         XCTAssertEqual(EdenMetric.segmentedHeight, 30)
     }
 
-    /// Not in the Eden docs — pinned against the extracted originals.
-    func testModalMetricsMatchTheExtractedOriginals() {
-        XCTAssertEqual(EdenMetric.modalWidth, 640)
-        XCTAssertEqual(EdenMetric.modalTopInset, 118)
+    /// Not in the Eden docs — pinned against the frozen M1 prototype
+    /// (`docs/prototypes/m1-eden-clone.html`, `.modal` / `.scrim`).
+    func testModalMetricsMatchTheFrozenPrototype() {
+        XCTAssertEqual(EdenMetric.modalWidth, 680)
+        XCTAssertEqual(EdenMetric.modalTopInset, 104)
         XCTAssertEqual(EdenMetric.fieldHeight, 44)
         XCTAssertEqual(EdenMetric.modalButtonHeight, 35)
     }

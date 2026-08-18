@@ -38,10 +38,27 @@ public enum EdenColor {
     /// `#E0E0E0` — the border Eden's floating chrome and modals use.
     public static let hairline = hex(0xE0E0E0)
 
+    // MARK: Status
+    /// The live dot on the `Daily pull` chip, as it reads on the page: the
+    /// prototype's `#00bc7d` over `white/80` on canvas measures `#00B579`.
+    public static let statusActive = hex(0x00B579)
+    /// Its 2 pt halo — `rgba(0,188,125,.18)` resolved the same way.
+    public static let statusActiveRing = hex(0xC9EAE0)
+    /// `✓ Done · HH:MM` after a pull finishes.
+    public static let statusDone = hex(0x007A55)
+    /// The wash behind that line — `rgba(0,188,125,.09)`.
+    public static let statusDoneTint = hex(0x00BC7D).opacity(0.09)
+
     // MARK: Rules
     /// The 1 px vertical rail drawn beside a sidebar group's child rows.
     /// `black/9%`, so it reads on `sidebar` without becoming a border.
     public static let guideRail = Color.black.opacity(0.09)
+    /// The same rail one level deeper, where it must not compete with the
+    /// rail beside it.
+    public static let guideRailDeep = Color.black.opacity(0.06)
+    /// What a modal is laid over: `rgba(20,18,16,.18)`.
+    public static let scrim = Color(.sRGB, red: 20 / 255, green: 18 / 255, blue: 16 / 255,
+                                    opacity: 0.18)
 
     /// Cards, pills and modals are painted with alpha-on-black rather than the
     /// neutral ramp; `black(6)` reads as Tailwind's `black/[0.06]`.

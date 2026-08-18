@@ -28,15 +28,19 @@ public struct EdenMonogram: View {
     /// The two squares Eden draws. They differ in more than size — casing and
     /// fill are part of the variant, so a caller only picks the slot.
     public enum Size {
-        /// The Project switcher: 20 pt square, r6, `black/6%`, 10/600 `n700`,
-        /// initial in caps.
-        case switcher20
+        /// The account row and a popover's header: 20 pt square, `EdenRadius.xs`,
+        /// `black/6%`, 10/600 `n700`, initial in caps.
+        case mono20
         /// The small monogram: 18 pt square, `EdenRadius.mono`, `primaryTint`
         /// behind 9.5/600 `primary`, initial in lower case.
         case mono18
 
+        /// v0.1.0's name for `mono20`.
+        @available(*, deprecated, renamed: "mono20")
+        public static var switcher20: Size { .mono20 }
+
         var side: CGFloat { self == .mono18 ? EdenMetric.mono18 : EdenMetric.iconSlot }
-        var radius: CGFloat { self == .mono18 ? EdenRadius.mono : 6 }
+        var radius: CGFloat { self == .mono18 ? EdenRadius.mono : EdenRadius.xs }
         var font: Font { EdenFont.ui(self == .mono18 ? 9.5 : 10, .semibold) }
         var foreground: Color { self == .mono18 ? EdenColor.primary : EdenColor.n700 }
         var fill: Color { self == .mono18 ? EdenColor.primaryTint : EdenColor.black(6) }
@@ -45,7 +49,7 @@ public struct EdenMonogram: View {
     public let text: String
     public let size: Size
 
-    public init(text: String, size: Size = .switcher20) {
+    public init(text: String, size: Size = .mono20) {
         self.text = text
         self.size = size
     }
@@ -64,30 +68,38 @@ public struct EdenMonogram: View {
 /// A Library filter chip. Presentational only — the host app owns filtering.
 public struct EdenFilterChip: View {
     public let title: String
-    public let symbol: String
+    public let icon: EdenIcon
     public var chevron: Bool
     public var isActive: Bool
+    /// A chip squeezed for room drops its label and keeps its glyph, rather
+    /// than wrapping the row onto a second line (R-... narrow Library).
+    public var isCompact: Bool
 
-    public init(title: String, symbol: String, chevron: Bool = false, isActive: Bool = false) {
+    public init(title: String, icon: EdenIcon, chevron: Bool = false,
+                isActive: Bool = false, isCompact: Bool = false) {
         self.title = title
-        self.symbol = symbol
+        self.icon = icon
         self.chevron = chevron
         self.isActive = isActive
+        self.isCompact = isCompact
     }
 
     public var body: some View {
         HStack(spacing: 6) {
-            Image(systemName: symbol).font(EdenFont.ui(13))
-            Text(title).font(EdenFont.ui(11.5, .medium))
-            if chevron {
-                Image(systemName: "chevron.down").font(EdenFont.ui(9)).opacity(0.7)
+            EdenIconView(icon, size: EdenIconSize.chip)
+            if !isCompact {
+                Text(title).edenText(EdenType.chip).fixedSize()
+                if chevron {
+                    EdenIconView(.chevronDown, size: EdenIconSize.chipChevron).opacity(0.7)
+                }
             }
         }
         .foregroundStyle(isActive ? EdenColor.n900 : EdenColor.n500)
-        .padding(.horizontal, 10)
+        .padding(.horizontal, isCompact ? 8 : 10)
         .frame(height: EdenMetric.pillHeight)
         .background(isActive ? Color.white : .clear, in: .capsule)
         .overlay(Capsule().strokeBorder(isActive ? EdenColor.black(15) : .clear))
+        .accessibilityLabel(title)
     }
 }
 
@@ -106,7 +118,8 @@ public struct EdenSegmented: View {
         HStack(spacing: 0) {
             ForEach(Array(titles.enumerated()), id: \.offset) { index, title in
                 Text(title)
-                    .font(EdenFont.ui(11.5, .medium))
+                    .edenText(EdenType.chip)
+                    .fixedSize()
                     .foregroundStyle(index == selected ? EdenColor.n800 : EdenColor.n500)
                     .padding(.horizontal, 10)
                     .frame(height: EdenMetric.segmentedHeight - 4)
@@ -115,12 +128,15 @@ public struct EdenSegmented: View {
         }
         .padding(2)
         .frame(height: EdenMetric.segmentedHeight)
+        .fixedSize()
         .background(EdenColor.black(1.8), in: .capsule)
         .overlay(Capsule().strokeBorder(EdenColor.black(6.5)))
     }
 }
 
 /// The view-mode glyphs beside a page title (Browse / Graph / Index).
+/// Eden dropped the trio: `EdenSegmented` is the only view switcher now.
+@available(*, deprecated, message: "Use EdenSegmented — Eden has one view switcher")
 public struct EdenViewModes: View {
     public let symbols: [String]
     public let selected: Int

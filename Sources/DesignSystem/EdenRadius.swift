@@ -2,6 +2,9 @@ import SwiftUI
 
 /// Eden overrides Tailwind's radius scale — `lg` (18) is bigger than `xl` (12).
 public enum EdenRadius {
+    /// The smallest square Eden rounds: a monogram, a Board's disclosure, the
+    /// `+` on a section header.
+    public static let xs: CGFloat = 6
     public static let sm: CGFloat = 8
     /// `rounded-md`/`rounded-xl`: sidebar panel and rows, list rows, tiles.
     public static let md: CGFloat = 12

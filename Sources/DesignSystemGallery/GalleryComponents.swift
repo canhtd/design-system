@@ -23,6 +23,11 @@ struct MetricList: View {
          ("pillHeight", EdenMetric.pillHeight),
          ("searchFieldHeight", EdenMetric.searchFieldHeight),
          ("segmentedHeight", EdenMetric.segmentedHeight),
+         ("chipHeight", EdenMetric.chipHeight),
+         ("smallPillHeight", EdenMetric.smallPillHeight),
+         ("popoverRowHeight", EdenMetric.popoverRowHeight),
+         ("rowActionSize", EdenMetric.rowActionSize),
+         ("paneHeaderHeight", EdenMetric.paneHeaderHeight),
          ("modalWidth", EdenMetric.modalWidth),
          ("modalTopInset", EdenMetric.modalTopInset),
          ("fieldHeight", EdenMetric.fieldHeight),
@@ -52,7 +57,8 @@ struct ControlRow: View {
     var body: some View {
         HStack(spacing: 16) {
             Button("+ New") {}.buttonStyle(EdenPillButtonStyle())
-            Button("Pull now") {}.buttonStyle(EdenPillButtonStyle())
+            Button("Pull now") {}.buttonStyle(EdenSmallPrimaryButtonStyle())
+            Button("Edit hashtags") {}.buttonStyle(EdenSmallPillButtonStyle()).disabled(true)
             Button("Disabled") {}.buttonStyle(EdenPillButtonStyle()).disabled(true)
             Button("Cancel") {}.buttonStyle(EdenGhostButtonStyle())
             Button("Create Project") {}.buttonStyle(EdenPrimaryButtonStyle())
@@ -67,11 +73,9 @@ struct ComponentRow: View {
             EdenKbd(keys: ["⌘", "K"])
             EdenMonogram(text: "Principle")
             EdenMonogram(text: "Vessa", size: .mono18)
-            EdenFilterChip(title: "All", symbol: "square.grid.2x2", isActive: true)
-            EdenFilterChip(title: "Type", symbol: "doc", chevron: true)
+            EdenFilterChip(title: "All", icon: .layoutGrid, isActive: true)
+            EdenFilterChip(title: "Type", icon: .tag, chevron: true)
             EdenSegmented(titles: ["Grid", "List", "Creators"], selected: 0)
-            EdenViewModes(symbols: ["square.grid.2x2", "point.3.connected.trianglepath.dotted", "list.bullet"],
-                          selected: 0)
         }
     }
 }

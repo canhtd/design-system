@@ -28,6 +28,62 @@ public struct EdenPillButtonStyle: ButtonStyle {
     }
 }
 
+/// The committing action inside a popover — `Pull now`. Shorter than a modal's
+/// button and fully rounded: h28, r=full, `primary80` under `primary5`.
+public struct EdenSmallPrimaryButtonStyle: ButtonStyle {
+    public init() {}
+
+    public func makeBody(configuration: Configuration) -> some View {
+        SmallPrimaryLabel(configuration: configuration)
+    }
+
+    struct SmallPrimaryLabel: View {
+        let configuration: Configuration
+        @Environment(\.isEnabled) private var isEnabled
+
+        var body: some View {
+            configuration.label
+                .edenText(EdenType.chip)
+                .foregroundStyle(EdenColor.primary5)
+                .padding(.horizontal, 12)
+                .frame(height: EdenMetric.smallPillHeight)
+                .background(EdenColor.primary80, in: .capsule)
+                .opacity(isEnabled ? (configuration.isPressed ? 0.85 : 1) : 0.4)
+        }
+    }
+}
+
+/// Its quiet neighbour — `Edit hashtags`. h28, r=full, `black(9)` border on
+/// `white/80`. Disabled it keeps its resting border and fill and only the ink
+/// fades, so it reads as "not yet", not as "broken".
+public struct EdenSmallPillButtonStyle: ButtonStyle {
+    public init() {}
+
+    public func makeBody(configuration: Configuration) -> some View {
+        SmallPillLabel(configuration: configuration)
+    }
+
+    struct SmallPillLabel: View {
+        let configuration: Configuration
+        @Environment(\.isEnabled) private var isEnabled
+        @State private var hovering = false
+
+        var body: some View {
+            let highlighted = hovering && isEnabled
+            configuration.label
+                .edenText(EdenType.chip)
+                .foregroundStyle(isEnabled ? (highlighted ? EdenColor.n900 : EdenColor.n700)
+                                           : EdenColor.n400)
+                .padding(.horizontal, 12)
+                .frame(height: EdenMetric.smallPillHeight)
+                .background(highlighted ? Color.white : EdenColor.white(80), in: .capsule)
+                .overlay(Capsule().strokeBorder(EdenColor.black(9)))
+                .opacity(configuration.isPressed && isEnabled ? 0.75 : 1)
+                .onHover { hovering = $0 }
+        }
+    }
+}
+
 /// The modal's quiet action (`Cancel`): h35, r18, 12.5/500 `#525252`.
 public struct EdenGhostButtonStyle: ButtonStyle {
     public init() {}
