@@ -8,11 +8,18 @@ public struct EdenTextStyle: Sendable, Equatable {
     public let weight: Font.Weight
     /// Points, not ems — `letter-spacing: -.035em` at 27 px is −0.945 pt.
     public let tracking: CGFloat
+    /// The CSS line box, where a face has one. SwiftUI has no line-height, only
+    /// `lineSpacing` *between* lines, so this is for the places that build their
+    /// own text — `NSTextField`'s paragraph style — and is `nil` everywhere the
+    /// font's natural leading is what the prototype uses.
+    public let lineHeight: CGFloat?
 
-    public init(size: CGFloat, weight: Font.Weight = .regular, tracking: CGFloat = 0) {
+    public init(size: CGFloat, weight: Font.Weight = .regular, tracking: CGFloat = 0,
+                lineHeight: CGFloat? = nil) {
         self.size = size
         self.weight = weight
         self.tracking = tracking
+        self.lineHeight = lineHeight
     }
 
     public var font: Font { EdenFont.ui(size, weight) }
@@ -23,8 +30,9 @@ public struct EdenTextStyle: Sendable, Equatable {
 public enum EdenType {
     /// A screen's own title — `All items`, `Pulled today` (`proto .lib-title`).
     public static let pageTitle = EdenTextStyle(size: 27, weight: .medium, tracking: -0.945)
-    /// The New Project sheet's name field (`proto .np-title`).
-    public static let sheetTitle = EdenTextStyle(size: 26, weight: .medium, tracking: -1.04)
+    /// The New Project sheet's name field (`proto .np-title`, `line-height:1.3`).
+    public static let sheetTitle = EdenTextStyle(size: 26, weight: .medium, tracking: -1.04,
+                                                lineHeight: 33.8)
     /// `What are we making?` above the composer (`proto .hero-h`).
     public static let heroTitle = EdenTextStyle(size: 26, weight: .medium, tracking: -1.04)
     /// A Board's title, and an empty state's headline (`proto .btitle h1`).
