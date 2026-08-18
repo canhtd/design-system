@@ -39,6 +39,11 @@ public enum EdenMetric {
     /// A row's hover affordance ("open in pane"): a 28 pt hit target around a
     /// 13 pt glyph. Its own metric, because it is not a child row's height.
     public static let rowActionSize: CGFloat = 28
+    /// How far that hit target's trailing edge sits inside the sidebar's own
+    /// content column. Eden pulls the affordance back out of the row's padding
+    /// (`.rowact{margin-right:-6px}` against a row padded 12), and every row
+    /// that carries one shares the column whatever its own padding is.
+    public static let rowActionInset: CGFloat = 5.5
     /// The disclosure that replaces a Board row's leading icon on hover.
     public static let disclosureSize: CGFloat = 20
     /// The window's own chrome: the title bar is hidden, so the sidebar's first
@@ -60,6 +65,15 @@ public enum EdenMetric {
     /// Library container: `max-w-[1640px] px-12 pt-5 pb-16`.
     public static let libraryMaxWidth: CGFloat = 1640
     public static let libraryPaddingH: CGFloat = 48
+    /// The same padding for a Library that is only half a window wide — one
+    /// side of a split. 48 there costs the header its one-line rhythm: the
+    /// pull chip drops off the title row. Eden's own value is 24
+    /// (`proto libraryScreen()`: `W < 900 ? 24 : 48`); the extra point is the
+    /// pane card's 1 pt border, which a SwiftUI overlay stroke does not consume
+    /// the way CSS `border-box` does.
+    public static let libraryPaddingHNarrow: CGFloat = 25
+    /// Below this width a Library is drawn narrow.
+    public static let libraryNarrowWidth: CGFloat = 900
     public static let libraryPaddingTop: CGFloat = 20
     public static let libraryPaddingBottom: CGFloat = 64
     /// Header pills (`+ New`) and the filter chips.
