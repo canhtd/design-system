@@ -34,8 +34,13 @@ extension View {
 /// this view rather than spelling a gradient of its own.
 ///
 /// The measured Eden doc says 8%/4%; 5.5%/3% is the tuned value, the one
-/// checked against the real app, so it is what ships. Apply the gradient
-/// behind the content canvas only, not behind the floating sidebar panel.
+/// checked against the real app, so it is what ships.
+///
+/// It is one wash for a whole window, not one per column: it multiplies over
+/// the sidebar panel as well as the canvas, so the ground reads as continuous
+/// and the strip of canvas around the panel does not sit lighter than the
+/// content beside it. Because it multiplies, it goes *over* the panel — a
+/// gradient behind an opaque fill shows nothing.
 public struct EdenPageGradient: View {
     public init() {}
 

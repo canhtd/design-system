@@ -44,6 +44,14 @@ public enum EdenMetric {
     /// The window's own chrome: the title bar is hidden, so the sidebar's first
     /// control clears the traffic lights itself.
     public static let sidebarTopInset: CGFloat = 30
+    /// The same panel in native full screen, where there are no traffic lights
+    /// to clear: the panel keeps its own top pad and gives back the room the
+    /// lights were holding.
+    public static let sidebarTopInsetFullScreen: CGFloat = 20
+    /// How far the traffic lights sit from the sidebar panel's top and leading
+    /// edges. They belong inside the panel, with room around them, the way
+    /// Notion and Eden place them — not tucked against its corner.
+    public static let trafficLightInset: CGFloat = 12
     public static let windowMinWidth: CGFloat = 900
     public static let windowMinHeight: CGFloat = 600
     public static let windowDefaultWidth: CGFloat = 1440
@@ -74,6 +82,9 @@ public enum EdenMetric {
     /// (`proto .panes`).
     public static let paneInset: CGFloat = 9
     public static let paneGap: CGFloat = 9
+    /// Between the two cards of a split view. Wider than `paneGap`: a split is
+    /// two separate surfaces on the ground, not two halves of one card.
+    public static let splitGutter: CGFloat = 12
     /// A Chat beside a Board keeps its own width (`proto .pane--chat`).
     public static let chatPaneWidth: CGFloat = 572
     /// How wide a composer or a hero block is allowed to get inside it.
