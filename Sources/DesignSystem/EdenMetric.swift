@@ -74,6 +74,15 @@ public enum EdenMetric {
     /// (`proto .panes`).
     public static let paneInset: CGFloat = 9
     public static let paneGap: CGFloat = 9
+    /// A Chat beside a Board keeps its own width (`proto .pane--chat`).
+    public static let chatPaneWidth: CGFloat = 572
+    /// How wide a composer or a hero block is allowed to get inside it.
+    public static let composerMaxWidth: CGFloat = 620
+    /// A circular 28 pt button: the chat pane header, a composer's own
+    /// buttons, a Board's back chevron (`proto .cbtn28`).
+    public static let circleButton: CGFloat = 28
+    /// How wide a centred empty state's sentence is allowed to run.
+    public static let emptyStateMaxWidth: CGFloat = 460
 
     /// The New Project modal.
     public static let modalWidth: CGFloat = 680

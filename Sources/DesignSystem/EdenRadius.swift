@@ -14,6 +14,8 @@ public enum EdenRadius {
     public static let card: CGFloat = 16
     /// `rounded-3xl`: board title bar, item-detail header buttons, modals.
     public static let modal: CGFloat = 24
+    /// The chat composer pill (`chat-cc.css .cc__composer-pill`).
+    public static let composer: CGFloat = 22
 
     /// The 18 pt monogram square (`EdenMetric.mono18`).
     public static let mono: CGFloat = 5

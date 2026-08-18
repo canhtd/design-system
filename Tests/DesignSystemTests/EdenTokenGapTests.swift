@@ -32,6 +32,11 @@ final class EdenTokenGapTests: XCTestCase {
         XCTAssertEqual(EdenMetric.windowMinWidth, 900)
         XCTAssertEqual(EdenMetric.windowMinHeight, 600)
         XCTAssertEqual(EdenMetric.scrimBlur, 3)
+        XCTAssertEqual(EdenMetric.chatPaneWidth, 572)
+        XCTAssertEqual(EdenMetric.composerMaxWidth, 620)
+        XCTAssertEqual(EdenMetric.circleButton, 28)
+        XCTAssertEqual(EdenMetric.emptyStateMaxWidth, 460)
+        XCTAssertEqual(EdenRadius.composer, 22)
     }
 
     func testStatusAndRuleColours() {
