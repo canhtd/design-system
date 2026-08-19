@@ -95,4 +95,10 @@ public enum EdenIconSize {
     public static let sectionAction: CGFloat = 15
     /// An Actor row's kind glyph, inside `EdenMetric.actorKindTile`.
     public static let kindTile: CGFloat = 17
+    /// The Board header's `⇄` and gear (`proto boardScreen()` @16).
+    public static let boardHeader: CGFloat = 16
+    /// The floating toolbar's chat, bolt and sections glyphs (@18), and its
+    /// `+`, which is drawn a point larger (@19).
+    public static let toolbar: CGFloat = 18
+    public static let toolbarAdd: CGFloat = 19
 }
