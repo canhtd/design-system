@@ -59,6 +59,24 @@ public enum EdenType {
     public static let tableCell = EdenTextStyle(size: 12.5)
     /// A popover row, a Folder pane's list row.
     public static let popoverRow = EdenTextStyle(size: 13)
+
+    // MARK: - The Board
+
+    /// A section chip, the `+ Add section` pill and the danger button — the
+    /// Board's small emphasised label (`proto .schip`, `.bs-add`, `.bs-dbtn`).
+    public static let chipLabel = EdenTextStyle(size: 12.5, weight: .medium, tracking: -0.4375)
+    /// The `@` picker's tabs (`proto .mpop-tab`).
+    public static let smallLabel = EdenTextStyle(size: 12, weight: .medium)
+    /// A Document card's heading (`proto .doccard h3`).
+    public static let documentTitle = EdenTextStyle(size: 22, weight: .semibold, tracking: -0.44,
+                                                    lineHeight: 29.04)
+    /// A Note's text and a Document's body — the same 14/21 measure
+    /// (`proto .notecard p`, `.doccard .md`).
+    public static let cardBody = EdenTextStyle(size: 14, tracking: -0.042, lineHeight: 21)
+    /// A picker row's name (`proto .pick-nm`).
+    public static let pickName = EdenTextStyle(size: 13, weight: .medium, lineHeight: 18)
+    /// The keyboard hint beside an add-menu row (`proto .mkbd`).
+    public static let keyHint = EdenTextStyle(size: 10, weight: .medium, lineHeight: 14)
 }
 
 extension View {

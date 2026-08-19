@@ -147,6 +147,26 @@ final class EdenTokenGapTests: XCTestCase {
                           EdenMetric.windowMinHeight - EdenMetric.modalTopInset)
     }
 
+    /// A section's hue comes from its place in the Board's list, and the list
+    /// may be longer than the four hues — the fifth section reuses the first
+    /// rather than falling off the end.
+    func testSectionHuesWrap() {
+        XCTAssertEqual(EdenColor.sectionHue(0), EdenColor.sectionHues[0])
+        XCTAssertEqual(EdenColor.sectionHue(4), EdenColor.sectionHues[0])
+        XCTAssertEqual(EdenColor.sectionHue(5), EdenColor.sectionHues[1])
+        // `All` is not a section, so it never takes one of the hues.
+        XCTAssertEqual(EdenColor.sectionHue(-1), EdenColor.sectionAll)
+        XCTAssertFalse(EdenColor.sectionHues.contains(EdenColor.sectionAll))
+    }
+
+    /// The Board's masonry has to fit inside the pane it is measured against:
+    /// two gutters and the side padding cannot claim more than the break width.
+    func testMasonryFitsItsBreakpoint() {
+        let claimed = EdenMetric.boardScrollSide * 2 + EdenMetric.masonryGutterWide * 2
+        XCTAssertLessThan(claimed, EdenMetric.masonryBreakpoint)
+        XCTAssertLessThan(EdenMetric.masonryGutterNarrow, EdenMetric.masonryGutterWide)
+    }
+
     /// The six glyphs round 7 needs that v0.2.5 did not carry.
     func testRoundSevenGlyphsExist() {
         for icon in [EdenIcon.dots, .pencil, .notes, .externalLink, .sparkle, .layoutSidebarRight] {

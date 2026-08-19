@@ -157,6 +157,61 @@ public enum EdenMetric {
     public static let confirmSheetWidth: CGFloat = 420
     /// A row's `⋯` menu (`proto .pop--ctx`).
     public static let contextMenuWidth: CGFloat = 178
+    // MARK: - The Board (interaction-spec-board.md)
+
+    /// The Board's header floats over the cards rather than sitting above them:
+    /// inset 20 a side, 6 from the top, 36 tall (`proto .boardhd`).
+    public static let boardHeaderInset: CGFloat = 20
+    public static let boardHeaderTop: CGFloat = 6
+    public static let boardHeaderHeight: CGFloat = 36
+    /// The cards scroll under it, so the column starts below the header and
+    /// ends clear of the floating toolbar (`proto .boardscroll`).
+    public static let boardScrollTop: CGFloat = 79
+    public static let boardScrollSide: CGFloat = 32
+    public static let boardScrollBottom: CGFloat = 120
+    /// The floating toolbar and the right rail (`proto .btoolbar`, `.brail`).
+    public static let boardFloaterInset: CGFloat = 20
+    public static let boardFloaterHeight: CGFloat = 46
+    public static let boardFloaterPadding: CGFloat = 4
+    public static let boardRailWidth: CGFloat = 46
+    /// A floating-toolbar button.
+    public static let toolbarButton: CGFloat = 36
+    /// The `+` menu over the toolbar (`proto .pop--add`).
+    public static let addMenuWidth: CGFloat = 252
+    public static let addMenuRowHeight: CGFloat = 34
+    /// Masonry: three columns above this width of pane, else two
+    /// (`proto boardCards()`).
+    public static let masonryBreakpoint: CGFloat = 900
+    public static let masonryGutterWide: CGFloat = 21
+    public static let masonryGutterNarrow: CGFloat = 19
+    /// `List` is one centred column, not a full-bleed card.
+    public static let boardListColumnWidth: CGFloat = 760
+    /// A card's own padding (`proto .card`, `.notecard`, `.doccard`).
+    public static let cardPadding: CGFloat = 14
+    public static let notePaddingH: CGFloat = 24
+    public static let notePaddingV: CGFloat = 16
+    /// Four lines of room while a Note still says `Write a note…`.
+    public static let noteMinHeight: CGFloat = 84
+    public static let documentPaddingH: CGFloat = 28
+    public static let documentPaddingTop: CGFloat = 24
+    public static let documentPaddingBottom: CGFloat = 28
+    /// The Add-from-Library picker and the Board settings sheet are the same
+    /// width (`proto .modal--pick`, `.modal--bset`).
+    public static let wideSheetWidth: CGFloat = 560
+    /// How far the picker's list may run before it scrolls.
+    public static let pickListMaxHeight: CGFloat = 470
+    /// A picker row's checkbox and its round monogram.
+    public static let pickCheckbox: CGFloat = 16
+    public static let pickAvatar: CGFloat = 28
+    /// The Brand & voice textarea (`proto .bs-area`).
+    public static let brandAreaMinHeight: CGFloat = 72
+    /// A section's colour dot, on a chip and in the settings list.
+    public static let sectionDotChip: CGFloat = 6
+    public static let sectionDotRow: CGFloat = 8
+    /// The `@` picker inside the composer (`proto .mpop`).
+    public static let mentionTabHeight: CGFloat = 26
+    public static let mentionRowHeight: CGFloat = 34
+
     /// A field inside a sheet (`proto .bs-field`, `.ag-sel`).
     public static let sheetFieldHeight: CGFloat = 36
     public static let sheetSelectHeight: CGFloat = 32

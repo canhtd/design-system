@@ -54,6 +54,36 @@ public enum EdenColor {
     /// sheet's committing button. Derived, not measured off Eden (round 7).
     public static let danger = hex(0xB42318)
 
+    // MARK: - The Board
+
+    /// The Note card's yellow. Eden's own "Card item" is white; `m1-runs` §3.4
+    /// asks for a yellow-tinted note, so the fill and its border are Studio's
+    /// own — derived, not measured from Eden (`proto --note-bg/--note-border`).
+    public static let noteBackground = hex(0xFDFAED)
+    public static let noteBorder = Color(.sRGB, red: 161 / 255, green: 120 / 255,
+                                         blue: 20 / 255, opacity: 0.20)
+
+    /// The chip that means "no filter". It is not a section, so it keeps a
+    /// neutral dot rather than taking one of the hues (`proto SECTIONS[0]`).
+    public static let sectionAll = Color(.sRGB, red: 156 / 255, green: 163 / 255,
+                                         blue: 175 / 255, opacity: 0.7)
+
+    /// What a section's dot is painted, in the order sections are added
+    /// (`proto SECTION_HUES`). It wraps, so a sixth section reuses the first
+    /// hue rather than running out.
+    public static let sectionHues: [Color] = [
+        Color(.sRGB, red: 74 / 255, green: 222 / 255, blue: 128 / 255, opacity: 0.7),
+        Color(.sRGB, red: 96 / 255, green: 165 / 255, blue: 250 / 255, opacity: 0.7),
+        Color(.sRGB, red: 192 / 255, green: 132 / 255, blue: 252 / 255, opacity: 0.7),
+        Color(.sRGB, red: 251 / 255, green: 146 / 255, blue: 60 / 255, opacity: 0.7),
+    ]
+
+    /// The hue a section takes from its place in the Board's own list.
+    public static func sectionHue(_ index: Int) -> Color {
+        guard index >= 0 else { return sectionAll }
+        return sectionHues[index % sectionHues.count]
+    }
+
     // MARK: Rules
     /// The 1 px vertical rail drawn beside a sidebar group's child rows.
     /// `black/9%`, so it reads on `sidebar` without becoming a border.
