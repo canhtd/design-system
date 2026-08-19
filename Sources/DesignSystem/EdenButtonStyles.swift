@@ -140,3 +140,38 @@ public struct EdenPrimaryButtonStyle: ButtonStyle {
         }
     }
 }
+
+/// The committing action of a destructive confirmation — `Delete`. Same
+/// geometry as `EdenPrimaryButtonStyle`; only the fill says what it does
+/// (`proto .danger`).
+public struct EdenDangerButtonStyle: ButtonStyle {
+    public init() {}
+
+    public func makeBody(configuration: Configuration) -> some View {
+        DangerLabel(configuration: configuration)
+    }
+
+    struct DangerLabel: View {
+        let configuration: Configuration
+        @Environment(\.isEnabled) private var isEnabled
+        @State private var hovering = false
+
+        var body: some View {
+            configuration.label
+                .font(EdenFont.ui(12.5, .medium))
+                .foregroundStyle(Color.white)
+                .padding(.horizontal, 14)
+                .frame(height: EdenMetric.modalButtonHeight)
+                .background(EdenColor.danger,
+                            in: .rect(cornerRadius: EdenRadius.lg, style: .continuous))
+                .opacity(opacity)
+                .onHover { hovering = $0 }
+        }
+
+        private var opacity: Double {
+            if !isEnabled { return 0.35 }
+            if configuration.isPressed { return 0.85 }
+            return hovering ? 0.9 : 1
+        }
+    }
+}

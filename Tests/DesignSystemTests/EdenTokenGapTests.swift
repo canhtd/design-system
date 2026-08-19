@@ -146,3 +146,13 @@ final class EdenTokenGapTests: XCTestCase {
         }
     }
 }
+
+/// The destructive confirmation's own button — added for round 7's delete
+/// sheets (`proto .danger`).
+@MainActor
+final class EdenDangerButtonStyleTests: XCTestCase {
+    func testDangerStyleIsItsOwnFill() {
+        _ = EdenDangerButtonStyle()
+        XCTAssertNotEqual(EdenColor.danger, EdenColor.primary80)
+    }
+}
