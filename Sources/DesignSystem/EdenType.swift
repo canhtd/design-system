@@ -45,6 +45,20 @@ public enum EdenType {
     public static let chip = EdenTextStyle(size: 11.5, weight: .medium)
     /// A trailing count or age.
     public static let meta = EdenTextStyle(size: 12)
+    /// A list row's own name — an Actor row, a sheet's headline row.
+    public static let rowTitle = EdenTextStyle(size: 13.5, weight: .medium)
+    /// The line under it: `5 hashtags · every day 07:00 · last run 7 min ago`.
+    public static let rowMeta = EdenTextStyle(size: 11.5)
+    /// `Usage 12 / 50 today` — tabular, and never money.
+    public static let usagePill = EdenTextStyle(size: 10.5, weight: .medium, tracking: 0.264)
+    /// A `SOON` tag on a row that is drawn but cannot work yet.
+    public static let soonTag = EdenTextStyle(size: 9.5, weight: .semibold, tracking: 0.25)
+    /// A sheet's own heading — `Delete “X”?`, an `Add from Library` title.
+    public static let modalTitle = EdenTextStyle(size: 15, weight: .medium)
+    /// A table cell and a sheet's select control.
+    public static let tableCell = EdenTextStyle(size: 12.5)
+    /// A popover row, a Folder pane's list row.
+    public static let popoverRow = EdenTextStyle(size: 13)
 }
 
 extension View {

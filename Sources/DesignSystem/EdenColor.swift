@@ -49,6 +49,11 @@ public enum EdenColor {
     /// The wash behind that line — `rgba(0,188,125,.09)`.
     public static let statusDoneTint = hex(0x00BC7D).opacity(0.09)
 
+    // MARK: Destructive
+    /// `--danger` — the one destructive colour: a `Delete…` row, a confirm
+    /// sheet's committing button. Derived, not measured off Eden (round 7).
+    public static let danger = hex(0xB42318)
+
     // MARK: Rules
     /// The 1 px vertical rail drawn beside a sidebar group's child rows.
     /// `black/9%`, so it reads on `sidebar` without becoming a border.

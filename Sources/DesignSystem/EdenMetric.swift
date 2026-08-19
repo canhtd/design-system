@@ -116,4 +116,48 @@ public enum EdenMetric {
     public static let modalButtonHeight: CGFloat = 35
     /// The blur behind `EdenColor.scrim`.
     public static let scrimBlur: CGFloat = 3
+
+    // MARK: - Sidebar row actions (round 7)
+
+    /// A section header's own hover action (`+`, the split glyph): a 20 pt
+    /// square with `EdenRadius.xs` corners (`proto .sb-sechd .gact`).
+    public static let sectionActionSize: CGFloat = 20
+    /// The "show beside view" glyph at the right edge of a Chat row
+    /// (`proto .rowact--side`). Narrower than `rowActionSize` because it sits
+    /// flush against the row's edge with the `⋯` inside it.
+    public static let chatSideWidth: CGFloat = 26
+    /// How much width the two trailing actions of a Chat row take together, so
+    /// the title stops before them instead of sliding underneath
+    /// (`proto .sb-krow--chat:hover .txt{padding-right:52px}`).
+    public static let chatRowActionsWidth: CGFloat = 52
+
+    // MARK: - Actors screen
+
+    /// The content column of a screen that lists rows rather than cards.
+    public static let listScreenMaxWidth: CGFloat = 1056
+    /// An Actor row: `min-height:70`, `padding:12 14`, `EdenRadius.md`.
+    public static let actorRowMinHeight: CGFloat = 70
+    public static let actorRowPaddingH: CGFloat = 14
+    public static let actorRowPaddingV: CGFloat = 12
+    /// The 34 pt tile holding an Actor's kind glyph.
+    public static let actorKindTile: CGFloat = 34
+    /// The `Usage N / 50 today` pill. Shorter than a chip; never money.
+    public static let usagePillHeight: CGFloat = 20
+
+    // MARK: - Command palette and the sheets round 7 adds
+
+    /// The ⌘K create palette (`proto .modal--cmdk`).
+    public static let commandPaletteWidth: CGFloat = 640
+    /// Its search row, which the rows hang under.
+    public static let commandSearchHeight: CGFloat = 52
+    public static let commandRowHeight: CGFloat = 40
+    /// The Actor detail sheet (`proto .modal--actor`).
+    public static let actorSheetWidth: CGFloat = 600
+    /// A delete confirmation, and the `Move to…` picker.
+    public static let confirmSheetWidth: CGFloat = 420
+    /// A row's `⋯` menu (`proto .pop--ctx`).
+    public static let contextMenuWidth: CGFloat = 178
+    /// A field inside a sheet (`proto .bs-field`, `.ag-sel`).
+    public static let sheetFieldHeight: CGFloat = 36
+    public static let sheetSelectHeight: CGFloat = 32
 }

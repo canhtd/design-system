@@ -88,4 +88,11 @@ public enum EdenIconSize {
     public static let modalClose: CGFloat = 14
     /// The `x` on a hashtag token.
     public static let tagClose: CGFloat = 10
+    /// A row's `⋯` menu handle, and a Chat row's "show beside view" glyph.
+    public static let rowMenu: CGFloat = 14
+    public static let splitPane: CGFloat = 14
+    /// A section header's own actions, one size up from a row's.
+    public static let sectionAction: CGFloat = 15
+    /// An Actor row's kind glyph, inside `EdenMetric.actorKindTile`.
+    public static let kindTile: CGFloat = 17
 }

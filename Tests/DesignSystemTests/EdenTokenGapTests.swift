@@ -85,4 +85,64 @@ final class EdenTokenGapTests: XCTestCase {
     private func alpha(of colour: Color) -> Double {
         Double(NSColor(colour).usingColorSpace(.sRGB)!.alphaComponent)
     }
+
+    // MARK: - Round 7 (no Project): Actors, ⌘K, sidebar row actions
+
+    /// Every number here comes from `docs/prototypes/m1-r7.html` (r7.2, frozen
+    /// 2026-08-19) — `.sb-sechd .gact`, `.rowact--side`, `.agrow`, `.upill`,
+    /// `.modal--cmdk`, `.modal--actor`, `.modal--confirm`, `.pop--ctx`.
+    func testRoundSevenSidebarAndActorMetrics() {
+        XCTAssertEqual(EdenMetric.sectionActionSize, 20)
+        XCTAssertEqual(EdenMetric.chatSideWidth, 26)
+        XCTAssertEqual(EdenMetric.chatRowActionsWidth, 52)
+        XCTAssertEqual(EdenMetric.actorRowMinHeight, 70)
+        XCTAssertEqual(EdenMetric.actorRowPaddingH, 14)
+        XCTAssertEqual(EdenMetric.actorRowPaddingV, 12)
+        XCTAssertEqual(EdenMetric.actorKindTile, 34)
+        XCTAssertEqual(EdenMetric.usagePillHeight, 20)
+        XCTAssertEqual(EdenMetric.listScreenMaxWidth, 1056)
+    }
+
+    func testRoundSevenPaletteAndSheetMetrics() {
+        XCTAssertEqual(EdenMetric.commandPaletteWidth, 640)
+        XCTAssertEqual(EdenMetric.commandSearchHeight, 52)
+        XCTAssertEqual(EdenMetric.commandRowHeight, 40)
+        XCTAssertEqual(EdenMetric.actorSheetWidth, 600)
+        XCTAssertEqual(EdenMetric.confirmSheetWidth, 420)
+        XCTAssertEqual(EdenMetric.contextMenuWidth, 178)
+        XCTAssertEqual(EdenMetric.sheetFieldHeight, 36)
+        XCTAssertEqual(EdenMetric.sheetSelectHeight, 32)
+    }
+
+    func testRoundSevenIconSizesAndFaces() {
+        XCTAssertEqual(EdenIconSize.rowMenu, 14)
+        XCTAssertEqual(EdenIconSize.splitPane, 14)
+        XCTAssertEqual(EdenIconSize.sectionAction, 15)
+        XCTAssertEqual(EdenIconSize.kindTile, 17)
+        XCTAssertEqual(EdenType.rowTitle.size, 13.5)
+        XCTAssertEqual(EdenType.rowTitle.weight, .medium)
+        XCTAssertEqual(EdenType.rowMeta.size, 11.5)
+        XCTAssertEqual(EdenType.usagePill.size, 10.5)
+        XCTAssertEqual(EdenType.usagePill.tracking, 0.264, accuracy: 0.001)
+        XCTAssertEqual(EdenType.soonTag.size, 9.5)
+        XCTAssertEqual(EdenType.modalTitle.size, 15)
+        XCTAssertEqual(EdenType.tableCell.size, 12.5)
+        XCTAssertEqual(EdenType.popoverRow.size, 13)
+    }
+
+    /// `--danger:#b42318` — derived, not measured, and the only destructive
+    /// colour the app is allowed to spell.
+    func testDangerColour() {
+        let danger = NSColor(EdenColor.danger).usingColorSpace(.sRGB)
+        XCTAssertEqual(danger?.redComponent ?? 0, 0xB4 / 255, accuracy: 0.01)
+        XCTAssertEqual(danger?.greenComponent ?? 0, 0x23 / 255, accuracy: 0.01)
+        XCTAssertEqual(danger?.blueComponent ?? 0, 0x18 / 255, accuracy: 0.01)
+    }
+
+    /// The six glyphs round 7 needs that v0.2.5 did not carry.
+    func testRoundSevenGlyphsExist() {
+        for icon in [EdenIcon.dots, .pencil, .notes, .externalLink, .sparkle, .layoutSidebarRight] {
+            XCTAssertFalse(icon.subpaths.isEmpty, "\(icon.rawValue) has no path data")
+        }
+    }
 }
