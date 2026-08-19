@@ -184,7 +184,9 @@ public enum EdenMetric {
     public static let masonryBreakpoint: CGFloat = 900
     public static let masonryGutterWide: CGFloat = 21
     public static let masonryGutterNarrow: CGFloat = 19
-    /// `List` is one centred column, not a full-bleed card.
+    /// `List` is one centred column, not a full-bleed card, and its cards sit
+    /// closer together than the grid's.
+    public static let masonryGutterList: CGFloat = 12
     public static let boardListColumnWidth: CGFloat = 760
     /// A card's own padding (`proto .card`, `.notecard`, `.doccard`).
     public static let cardPadding: CGFloat = 14
