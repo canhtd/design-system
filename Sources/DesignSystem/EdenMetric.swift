@@ -160,4 +160,8 @@ public enum EdenMetric {
     /// A field inside a sheet (`proto .bs-field`, `.ag-sel`).
     public static let sheetFieldHeight: CGFloat = 36
     public static let sheetSelectHeight: CGFloat = 32
+    /// How tall a list inside a sheet may grow before it scrolls. A Workspace
+    /// can hold more Folders than a 900 pt window has room for, and a sheet
+    /// that grows past the window loses its own footer off the bottom.
+    public static let sheetListMaxHeight: CGFloat = 320
 }

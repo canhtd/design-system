@@ -139,6 +139,14 @@ final class EdenTokenGapTests: XCTestCase {
         XCTAssertEqual(danger?.blueComponent ?? 0, 0x18 / 255, accuracy: 0.01)
     }
 
+    /// A sheet's scrolling list stops short of the window it sits in — the
+    /// modal is inset 92 pt from the top of a 900 pt window and still has a
+    /// footer to draw under the list.
+    func testSheetListStopsShortOfTheWindow() {
+        XCTAssertLessThan(EdenMetric.sheetListMaxHeight,
+                          EdenMetric.windowMinHeight - EdenMetric.modalTopInset)
+    }
+
     /// The six glyphs round 7 needs that v0.2.5 did not carry.
     func testRoundSevenGlyphsExist() {
         for icon in [EdenIcon.dots, .pencil, .notes, .externalLink, .sparkle, .layoutSidebarRight] {
