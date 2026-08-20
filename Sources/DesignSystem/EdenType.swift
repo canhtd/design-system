@@ -101,6 +101,13 @@ public enum EdenType {
     /// `Today`, between the hairlines above the first turn of a day
     /// (`proto .cc__day-divider`).
     public static let chatDay = EdenTextStyle(size: 11)
+    /// A heading inside that answer — `Hook`, `Body`, `CTA` (`.cc-md h4` at
+    /// the pane's own measure: 0.95rem, 600, −0.35 px, 1.3).
+    public static let chatHeading = EdenTextStyle(size: 15.2, weight: .semibold,
+                                                  tracking: -0.35, lineHeight: 19.76)
+    /// The same heading on a Board's document card, which sets its body one
+    /// step smaller (`proto .doccard .md h4`).
+    public static let documentHeading = EdenTextStyle(size: 14, weight: .semibold)
 }
 
 extension View {
