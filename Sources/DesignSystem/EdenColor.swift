@@ -56,12 +56,11 @@ public enum EdenColor {
 
     // MARK: - The Board
 
-    /// The Note card's yellow. Eden's own "Card item" is white; `m1-runs` §3.4
-    /// asks for a yellow-tinted note, so the fill and its border are Studio's
-    /// own — derived, not measured from Eden (`proto --note-bg/--note-border`).
-    public static let noteBackground = hex(0xFDFAED)
-    public static let noteBorder = Color(.sRGB, red: 161 / 255, green: 120 / 255,
-                                         blue: 20 / 255, opacity: 0.20)
+    /// Eden's **Card item** border (`eden-components.md` §3): a Note card is
+    /// white paper with a 1 pt `#e2e8f0` edge. It replaced the yellow tint
+    /// Studio had invented — Note and Document cards are told apart by depth,
+    /// not by colour (r7.3).
+    public static let cardItemBorder = hex(0xE2E8F0)
 
     /// The chip that means "no filter". It is not a section, so it keeps a
     /// neutral dot rather than taking one of the hues (`proto SECTIONS[0]`).

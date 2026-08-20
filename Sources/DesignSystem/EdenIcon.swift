@@ -16,6 +16,7 @@ public enum EdenIcon: String, Sendable, CaseIterable {
     case chevronRight = "chevron-right"
     case circleChevronDown = "circle-chevron-down"
     case circleChevronRight = "circle-chevron-right"
+    case copy = "copy"
     case cube = "cube"
     case dots = "dots"
     case fileText = "file-text"

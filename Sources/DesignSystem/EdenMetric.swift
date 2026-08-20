@@ -151,6 +151,12 @@ public enum EdenMetric {
     /// Its search row, which the rows hang under.
     public static let commandSearchHeight: CGFloat = 52
     public static let commandRowHeight: CGFloat = 40
+    /// r7.3 — the destination pill on `New card`, which names where the card
+    /// will land instead of taking a shortcut letter (`proto .ck-dest`).
+    public static let commandDestHeight: CGFloat = 24
+    public static let commandDestGap: CGFloat = 5
+    public static let commandDestLeading: CGFloat = 8
+    public static let commandDestTrailing: CGFloat = 7
     /// The Actor detail sheet (`proto .modal--actor`).
     public static let actorSheetWidth: CGFloat = 600
     /// A delete confirmation, and the `Move to…` picker.
