@@ -77,6 +77,9 @@ public enum EdenType {
     public static let pickName = EdenTextStyle(size: 13, weight: .medium, lineHeight: 18)
     /// The keyboard hint beside an add-menu row (`proto .mkbd`).
     public static let keyHint = EdenTextStyle(size: 10, weight: .medium, lineHeight: 14)
+    /// The words beside a keycap in the ⌘K palette's footer — regular, not
+    /// medium, and a half point larger than the cap (`proto .ck-ft`).
+    public static let footerHint = EdenTextStyle(size: 11.5)
 }
 
 extension View {

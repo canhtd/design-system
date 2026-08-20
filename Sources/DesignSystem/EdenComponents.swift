@@ -3,10 +3,27 @@ import SwiftUI
 /// The `⌘ K` keycaps in the Create-or-search pill: 15 pt square, r4,
 /// `black/5%`, 10/500 `#737373`.
 public struct EdenKbd: View {
-    public let keys: [String]
+    /// How loud the keycap is. A row that is not here yet still shows the
+    /// letter it will answer to, in `n300` — the plate keeps its strength, so
+    /// the row reads as waiting rather than as faded out
+    /// (`proto .ck-row.off .mkbd`).
+    public enum Tone {
+        case normal, quiet
 
-    public init(keys: [String]) {
+        var letter: Color {
+            switch self {
+            case .normal: EdenColor.n500
+            case .quiet: EdenColor.n300
+            }
+        }
+    }
+
+    public let keys: [String]
+    public let tone: Tone
+
+    public init(keys: [String], tone: Tone = .normal) {
         self.keys = keys
+        self.tone = tone
     }
 
     public var body: some View {
@@ -14,7 +31,7 @@ public struct EdenKbd: View {
             ForEach(keys, id: \.self) { key in
                 Text(key)
                     .font(EdenFont.ui(10, .medium))
-                    .foregroundStyle(EdenColor.n500)
+                    .foregroundStyle(tone.letter)
                     .frame(minWidth: 15, minHeight: 15)
                     .padding(.horizontal, 2)
                     .background(EdenColor.black(5), in: .rect(cornerRadius: 4))
