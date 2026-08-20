@@ -210,6 +210,13 @@ public enum EdenMetric {
     /// A section's colour dot, on a chip and in the settings list.
     public static let sectionDotChip: CGFloat = 6
     public static let sectionDotRow: CGFloat = 8
+    /// The section dot on a Board card, top-right (`proto .secdot`). Bigger
+    /// than either of the above: it sits on a card, not in a line of text, and
+    /// it is the only thing saying which section the card is filed under.
+    public static let sectionDotCard: CGFloat = 9
+    /// The white ring around that dot, and the inset it sits at.
+    public static let sectionDotRing: CGFloat = 0.75
+    public static let sectionDotInset: CGFloat = 9
     /// The `@` picker inside the composer (`proto .mpop`).
     public static let mentionTabHeight: CGFloat = 26
     public static let mentionRowHeight: CGFloat = 34

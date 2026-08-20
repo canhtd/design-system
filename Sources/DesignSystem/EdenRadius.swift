@@ -21,4 +21,8 @@ public enum EdenRadius {
     public static let mono: CGFloat = 5
     /// A sidebar child row — tighter than `md`, because the row is shorter.
     public static let childRow: CGFloat = 10
+    /// A tick box in a picker list (`proto .pick-cb`).
+    public static let checkbox: CGFloat = 5
+    /// One row of a floating menu (`proto .pop--add a`).
+    public static let menuRow: CGFloat = 4
 }
