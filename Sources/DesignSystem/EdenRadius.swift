@@ -25,4 +25,10 @@ public enum EdenRadius {
     public static let checkbox: CGFloat = 5
     /// One row of a floating menu (`proto .pop--add a`).
     public static let menuRow: CGFloat = 4
+    /// The user's own bubble in a Chat pane — rounder than a card, and one
+    /// step tighter than a full-width chat's 22
+    /// (`.ai-sidepeek-chat .cc-msg--user .cc-msg__bubble`).
+    public static let chatBubble: CGFloat = 18
+    /// The follow-up card under a finished answer (`proto .cc-format-pick`).
+    public static let followUp: CGFloat = 12
 }

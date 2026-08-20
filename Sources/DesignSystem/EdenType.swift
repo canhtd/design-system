@@ -80,6 +80,27 @@ public enum EdenType {
     /// The words beside a keycap in the ⌘K palette's footer — regular, not
     /// medium, and a half point larger than the cap (`proto .ck-ft`).
     public static let footerHint = EdenTextStyle(size: 11.5)
+
+    // MARK: - The Chat turn (spec §3.7, `proto chatTurn()`)
+
+    /// The assistant's markdown, at the measure a Chat pane uses rather than a
+    /// full-width chat (`.ai-sidepeek-chat .cc-md`: 0.875rem / 1.65).
+    public static let chatBody = EdenTextStyle(size: 14, lineHeight: 23.1)
+    /// An @mention chip above a user turn, and the composer's context chip
+    /// (`proto .cc-selected-item`).
+    public static let chatMention = EdenTextStyle(size: 12)
+    /// The collapsed activity chip's name — `Opened item` (`proto .cc-tool__name`).
+    public static let chatActivity = EdenTextStyle(size: 13, weight: .medium, lineHeight: 19.5)
+    /// Its count pill — `×3` (`proto .cc-tool__count`).
+    public static let chatActivityCount = EdenTextStyle(size: 11.2, weight: .semibold,
+                                                        tracking: 0.224, lineHeight: 16.8)
+    /// The follow-up card's one question (`proto .cc-format-pick__question`).
+    public static let chatQuestion = EdenTextStyle(size: 15, weight: .medium, lineHeight: 22.5)
+    /// A chip that answers it (`proto .cc-format-pick__chip`).
+    public static let chatChoice = EdenTextStyle(size: 15, weight: .medium)
+    /// `Today`, between the hairlines above the first turn of a day
+    /// (`proto .cc__day-divider`).
+    public static let chatDay = EdenTextStyle(size: 11)
 }
 
 extension View {

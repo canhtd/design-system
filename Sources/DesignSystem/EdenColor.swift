@@ -83,6 +83,35 @@ public enum EdenColor {
         return sectionHues[index % sectionHues.count]
     }
 
+    // MARK: - The Chat turn
+
+    /// The user's own bubble: a soft top-lit gradient, not a flat fill
+    /// (`proto --cc-user-bg`).
+    public static let chatBubbleTop = hex(0xF6F8FA)
+    public static let chatBubbleBottom = hex(0xEBEFF3)
+    /// Its edge — `rgba(15,23,42,.10)` (`proto --cc-user-border`).
+    public static let chatBubbleBorder = Color(.sRGB, red: 15 / 255, green: 23 / 255,
+                                               blue: 42 / 255, opacity: 0.10)
+    /// The count pill on the collapsed activity chip — `Opened item ×3`. Its
+    /// own warm grey rather than the neutral ramp (`proto .cc-tool__count`).
+    public static let chatCountText = hex(0x6B5E52)
+    public static let chatCountTint = Color(.sRGB, red: 107 / 255, green: 94 / 255,
+                                            blue: 82 / 255, opacity: 0.12)
+    /// The follow-up card under a finished answer: a barely-there wash with a
+    /// warm edge (`proto .cc-format-pick`).
+    public static let followUpSurface = warm(0.019)
+    public static let followUpBorder = warm(0.08)
+    /// A chip that answers it, at rest and hovered.
+    public static let followUpChipBorder = warm(0.10)
+    public static let followUpChipHoverBorder = warm(0.20)
+    public static let followUpChipHover = warm(0.03)
+
+    /// Eden's warm ink — `rgba(70,60,45,a)`, what the chat's own surfaces are
+    /// tinted with instead of plain black.
+    public static func warm(_ alpha: Double) -> Color {
+        Color(.sRGB, red: 70 / 255, green: 60 / 255, blue: 45 / 255, opacity: alpha)
+    }
+
     // MARK: Rules
     /// The 1 px vertical rail drawn beside a sidebar group's child rows.
     /// `black/9%`, so it reads on `sidebar` without becoming a border.

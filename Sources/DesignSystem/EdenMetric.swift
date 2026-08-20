@@ -234,4 +234,48 @@ public enum EdenMetric {
     /// can hold more Folders than a 900 pt window has room for, and a sheet
     /// that grows past the window loses its own footer off the bottom.
     public static let sheetListMaxHeight: CGFloat = 320
+
+    // MARK: - The Chat turn (spec §3.7, `proto chatTurn()`)
+
+    /// How wide the turns run inside the pane before they centre
+    /// (`.ai-sidepeek-chat .cc__scroll-content`).
+    public static let chatTurnMaxWidth: CGFloat = 620
+    /// The padding around one turn (`.ai-sidepeek-chat .cc__msg-pad`).
+    public static let chatTurnPaddingH: CGFloat = 18
+    public static let chatTurnPaddingV: CGFloat = 14
+    /// How much of the column one turn may take (`.ai-sidepeek-chat .cc-msg`).
+    public static let chatTurnWidthFraction: CGFloat = 0.95
+    /// Between the pieces of one turn — chip, markdown, follow-up
+    /// (`proto .cc-msg__parts`).
+    public static let chatPartGap: CGFloat = 8
+    /// The user's bubble (`.ai-sidepeek-chat .cc-msg--user .cc-msg__bubble`).
+    public static let chatBubblePaddingH: CGFloat = 15
+    public static let chatBubblePaddingV: CGFloat = 10
+    /// An @mention chip (`proto .cc-selected-item`), and the row of them.
+    public static let chatMentionGap: CGFloat = 6
+    public static let chatMentionPaddingH: CGFloat = 10
+    public static let chatMentionPaddingV: CGFloat = 4
+    public static let chatMentionMaxWidth: CGFloat = 180
+    /// A turn's hover actions — Copy · Save as document · Regenerate
+    /// (`proto .cc-msg__action-btn`).
+    public static let chatActionButton: CGFloat = 24
+    public static let chatActionGap: CGFloat = 2
+    public static let chatActionGlyph: CGFloat = 14
+    /// The collapsed activity chip (`proto .cc-tool__head`, `.cc-tool__left`).
+    public static let chatActivityHeight: CGFloat = 20
+    public static let chatActivityGap: CGFloat = 8
+    /// Its count pill (`proto .cc-tool__count`).
+    public static let chatCountPaddingH: CGFloat = 7
+    public static let chatCountPaddingV: CGFloat = 1
+    /// The follow-up card and its chips (`proto .cc-format-pick`).
+    public static let chatFollowUpPaddingH: CGFloat = 18
+    public static let chatFollowUpPaddingV: CGFloat = 16
+    public static let chatFollowUpGap: CGFloat = 12
+    public static let chatFollowUpChipGap: CGFloat = 8
+    public static let chatFollowUpChipHeight: CGFloat = 35
+    public static let chatFollowUpChipPaddingH: CGFloat = 13
+    /// `Today`, between two hairlines (`proto .cc__day-divider`).
+    public static let chatDayGap: CGFloat = 12
+    public static let chatDayPaddingH: CGFloat = 24
+    public static let chatDayPaddingTop: CGFloat = 10
 }
