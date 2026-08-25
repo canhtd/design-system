@@ -47,8 +47,7 @@ extension EdenColor {
     /// The chosen segment's own capsule inside that track.
     public static let segmentSelectedFill = dual(light: black(5.5), dark: white(10))
 
-    /// The plate under a `⌘ K` keycap. The deprecated `EdenViewModes` draws
-    /// its track on the same plate.
+    /// The plate under a `⌘ K` keycap.
     public static let keycapFill = dual(light: black(5), dark: white(8))
     /// The square a `mono20` monogram's initial sits on. The small monogram is
     /// tinted with `primaryTint` instead.
@@ -57,6 +56,15 @@ extension EdenColor {
     /// deprecated `EdenViewModes`. Deeper under dark, where a 8 % shadow on a
     /// dark ground is not a lift at all.
     public static let raisedShadow = dual(light: black(8), dark: black(60))
+
+    /// The deprecated `EdenViewModes` has its own track and its own mark, and
+    /// not the keycap plate and the filter chip's fill it borrowed while both
+    /// were light-only. Under light those were `black/5%` and white, 17 levels
+    /// apart, and a drop shadow carried the rest; reusing them under dark left
+    /// 6 levels and a black shadow on a dark ground, which is no mark at all.
+    /// These two are 33 levels apart. Light is unchanged.
+    public static let viewModeTrackFill = dual(light: black(5), dark: white(4))
+    public static let viewModeSelectedFill = dual(light: white(100), dark: white(18))
 
     // MARK: Surfaces a view paints
 

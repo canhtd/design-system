@@ -36,6 +36,17 @@ final class EdenAppearanceControlTests: XCTestCase {
         assertPair(EdenColor.monogramFill, black, white, lightAlpha: 0.06, darkAlpha: 0.09)
     }
 
+    /// The deprecated view switcher's own two roles. Its mark has to stay
+    /// clear of its track under dark, where the drop shadow that carried it
+    /// under light does nothing.
+    func testTheDeprecatedViewSwitcherKeepsItsMarkVisible() {
+        assertPair(EdenColor.viewModeTrackFill, black, white, lightAlpha: 0.05, darkAlpha: 0.04)
+        assertPair(EdenColor.viewModeSelectedFill, white, white, lightAlpha: 1, darkAlpha: 0.18)
+        // Composited on the dark canvas, mark and track must not converge.
+        let ground = 17.0, mark = 0.18 * 255 + 0.82 * ground, track = 0.04 * 255 + 0.96 * ground
+        XCTAssertGreaterThan(mark - track, 20, "the current glyph has stopped reading as current")
+    }
+
     /// Depth on a dark ground is still a shadow. These are the only tokens
     /// that stay black in both Appearances.
     func testShadowsDeepenRatherThanFlip() {

@@ -26,7 +26,7 @@ public enum EdenMetric {
     /// behind 9.5/600 `primary` — see `EdenMonogram.Size.mono18`.
     public static let mono18: CGFloat = 18
     /// A child row under a sidebar group, beside `EdenColor.guideRail`:
-    /// h28, `EdenRadius.childRow`, 14/400 in `EdenColor.n600`.
+    /// h28, `EdenRadius.childRow`, 14/400 in `EdenColor.textControlQuiet`.
     public static let childRowHeight: CGFloat = 28
     /// A child row's icon slot, smaller than a nav row's 20.
     public static let childIconSlot: CGFloat = 16

@@ -173,13 +173,13 @@ public struct EdenViewModes: View {
                     .foregroundStyle(index == selected ? EdenColor.textSelected
                                                       : EdenColor.textTertiary)
                     .frame(width: 28, height: 24)
-                    .background(index == selected ? EdenColor.chipActiveFill : .clear,
+                    .background(index == selected ? EdenColor.viewModeSelectedFill : .clear,
                                 in: .capsule)
                     .shadow(color: index == selected ? EdenColor.raisedShadow : .clear,
                             radius: 1, y: 1)
             }
         }
         .padding(2)
-        .background(EdenColor.keycapFill, in: .capsule)
+        .background(EdenColor.viewModeTrackFill, in: .capsule)
     }
 }
