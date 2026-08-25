@@ -73,7 +73,7 @@ final class EdenTokenGapTests: XCTestCase {
 
     private func assertHex(_ colour: Color, _ expected: UInt32,
                            file: StaticString = #filePath, line: UInt = #line) {
-        let ns = NSColor(colour).usingColorSpace(.sRGB)!
+        let ns = resolved(colour, .light)
         let packed = UInt32(round(ns.redComponent * 255)) << 16
             | UInt32(round(ns.greenComponent * 255)) << 8
             | UInt32(round(ns.blueComponent * 255))
@@ -83,7 +83,7 @@ final class EdenTokenGapTests: XCTestCase {
     }
 
     private func alpha(of colour: Color) -> Double {
-        Double(NSColor(colour).usingColorSpace(.sRGB)!.alphaComponent)
+        Double(resolved(colour, .light).alphaComponent)
     }
 
     // MARK: - Round 7 (no Project): Actors, ⌘K, sidebar row actions
@@ -133,10 +133,10 @@ final class EdenTokenGapTests: XCTestCase {
     /// `--danger:#b42318` — derived, not measured, and the only destructive
     /// colour the app is allowed to spell.
     func testDangerColour() {
-        let danger = NSColor(EdenColor.danger).usingColorSpace(.sRGB)
-        XCTAssertEqual(danger?.redComponent ?? 0, 0xB4 / 255, accuracy: 0.01)
-        XCTAssertEqual(danger?.greenComponent ?? 0, 0x23 / 255, accuracy: 0.01)
-        XCTAssertEqual(danger?.blueComponent ?? 0, 0x18 / 255, accuracy: 0.01)
+        let danger = resolved(EdenColor.danger, .light)
+        XCTAssertEqual(danger.redComponent, 0xB4 / 255, accuracy: 0.01)
+        XCTAssertEqual(danger.greenComponent, 0x23 / 255, accuracy: 0.01)
+        XCTAssertEqual(danger.blueComponent, 0x18 / 255, accuracy: 0.01)
     }
 
     /// A sheet's scrolling list stops short of the window it sits in — the

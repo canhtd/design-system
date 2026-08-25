@@ -68,9 +68,7 @@ final class EdenSemanticTokenTests: XCTestCase {
 
     private func assertColour(_ colour: Color, _ expected: UInt32, alpha expectedAlpha: Double = 1,
                               file: StaticString = #filePath, line: UInt = #line) {
-        guard let ns = NSColor(colour).usingColorSpace(.sRGB) else {
-            return XCTFail("colour is not representable in sRGB", file: file, line: line)
-        }
+        let ns = resolved(colour, .light)
         let packed = UInt32(round(ns.redComponent * 255)) << 16
             | UInt32(round(ns.greenComponent * 255)) << 8
             | UInt32(round(ns.blueComponent * 255))

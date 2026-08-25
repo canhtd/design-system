@@ -61,12 +61,13 @@ final class EdenColorTests: XCTestCase {
 
     // MARK: Helpers
 
+    /// Every expectation above is a **light** value, so every read here has to
+    /// name the light Appearance. Resolving a pair without naming one gives
+    /// back whichever half the machine running the tests happens to be in, and
+    /// the suite then passes or fails on the tester's System setting rather
+    /// than on the tokens (`EdenAppearanceSupport.resolved(_:_:)`).
     private func srgb(_ colour: Color, file: StaticString = #filePath, line: UInt = #line) -> NSColor? {
-        guard let converted = NSColor(colour).usingColorSpace(.sRGB) else {
-            XCTFail("Colour is not representable in sRGB", file: file, line: line)
-            return nil
-        }
-        return converted
+        resolved(colour, .light)
     }
 
     private func assertHex(_ colour: Color, _ expected: UInt32,
@@ -81,6 +82,6 @@ final class EdenColorTests: XCTestCase {
     }
 
     private func alpha(of colour: Color) -> Double {
-        Double(NSColor(colour).alphaComponent)
+        Double(resolved(colour, .light).alphaComponent)
     }
 }
