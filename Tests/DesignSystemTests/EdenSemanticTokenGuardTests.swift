@@ -17,6 +17,7 @@ final class EdenSemanticTokenGuardTests: XCTestCase {
         "EdenColor.swift",          // the palette, the surfaces, the helpers
         "EdenColorInk.swift",       // the ink roles
         "EdenColorControl.swift",   // fills, edges, lifts, washes
+        "EdenColorBoard.swift",     // the Board, the Chat turn, the rules
         "EdenSignalColor.swift"     // the two signal ladders' measured hues
     ]
 

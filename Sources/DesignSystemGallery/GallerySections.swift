@@ -3,6 +3,8 @@ import DesignSystem
 import SwiftUI
 
 struct ColourGrid: View {
+    @Environment(\.colorScheme) private var colorScheme
+
     private var swatches: [(String, Color)] {
         [("canvas", EdenColor.canvas),
          ("sidebar", EdenColor.sidebar),
@@ -33,9 +35,9 @@ struct ColourGrid: View {
                     RoundedRectangle(cornerRadius: EdenRadius.md, style: .continuous)
                         .fill(colour)
                         .frame(height: 48)
-                        .edenBorder(EdenColor.black(10), radius: EdenRadius.md)
-                    Text(name).font(EdenFont.ui(12, .medium)).foregroundStyle(EdenColor.n800)
-                    Text(hexLabel(of: colour)).font(EdenFont.ui(11)).foregroundStyle(EdenColor.n400)
+                        .edenBorder(EdenColor.controlBorderHover, radius: EdenRadius.md)
+                    Text(name).font(EdenFont.ui(12, .medium)).foregroundStyle(EdenColor.textSelected)
+                    Text(hexLabel(of: colour)).font(EdenFont.ui(11)).foregroundStyle(EdenColor.textTertiary)
                 }
             }
         }
@@ -43,8 +45,17 @@ struct ColourGrid: View {
 
     /// The label is read back off the token so it cannot drift from the value.
     /// Translucent tokens carry their alpha, or they would read as solid black.
+    ///
+    /// A token is a pair, so reading it means saying which half: the label is
+    /// resolved inside the Appearance the page is being drawn in, or a dark
+    /// gallery would list the light values under dark swatches.
     private func hexLabel(of colour: Color) -> String {
-        guard let srgb = NSColor(colour).usingColorSpace(.sRGB) else { return "—" }
+        var resolved: NSColor?
+        NSAppearance(named: colorScheme == .dark ? .darkAqua : .aqua)?
+            .performAsCurrentDrawingAppearance {
+                resolved = NSColor(colour).usingColorSpace(.sRGB)
+            }
+        guard let srgb = resolved else { return "—" }
         let hex = String(format: "#%02x%02x%02x",
                          Int(round(srgb.redComponent * 255)),
                          Int(round(srgb.greenComponent * 255)),
@@ -60,7 +71,11 @@ struct AlphaRamps: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            ramp("black(%)", over: EdenColor.canvas, label: EdenColor.n400) { EdenColor.black($0) }
+            // Black-on-dark is as invisible as white-on-white, so under dark
+            // the black ramp keeps a light ground of its own. Under light this
+            // is `canvas`, unchanged.
+            ramp("black(%)", over: EdenColor.dual(light: 0xFAFAF8, dark: 0xE5E5E5),
+                 label: EdenColor.textTertiary) { EdenColor.black($0) }
             // White-on-white is invisible: the white ramp is only legible over
             // a dark surface, which is how Eden uses it (chrome over content).
             ramp("white(%)", over: EdenColor.n800, label: EdenColor.n300) { EdenColor.white($0) }
@@ -72,14 +87,14 @@ struct AlphaRamps: View {
                       label: Color,
                       _ colour: @escaping (Double) -> Color) -> some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text(title).font(EdenFont.ui(11.5)).foregroundStyle(EdenColor.n500)
+            Text(title).font(EdenFont.ui(11.5)).foregroundStyle(EdenColor.textSecondary)
             HStack(spacing: 6) {
                 ForEach(steps, id: \.self) { step in
                     VStack(spacing: 4) {
                         RoundedRectangle(cornerRadius: EdenRadius.sm, style: .continuous)
                             .fill(colour(step))
                             .frame(width: 56, height: 34)
-                            .edenBorder(EdenColor.black(10), radius: EdenRadius.sm)
+                            .edenBorder(EdenColor.controlBorderHover, radius: EdenRadius.sm)
                         Text(String(format: "%g", step))
                             .font(EdenFont.ui(10)).foregroundStyle(label)
                     }
@@ -118,7 +133,7 @@ struct TypeScale: View {
             ForEach(Array(rows.enumerated()), id: \.offset) { _, row in
                 HStack(alignment: .firstTextBaseline, spacing: 16) {
                     Text(String(format: "%g", row.0))
-                        .font(EdenFont.ui(11)).foregroundStyle(EdenColor.n400)
+                        .font(EdenFont.ui(11)).foregroundStyle(EdenColor.textTertiary)
                         .frame(width: 34, alignment: .trailing)
                     Text(row.2)
                         .font(EdenFont.ui(row.0, row.1))
@@ -143,9 +158,9 @@ struct RadiusRow: View {
                     RoundedRectangle(cornerRadius: value, style: .continuous)
                         .fill(EdenColor.card)
                         .frame(width: 92, height: 72)
-                        .edenBorder(EdenColor.black(10), radius: value)
+                        .edenBorder(EdenColor.controlBorderHover, radius: value)
                     Text("\(name) · \(String(format: "%g", value))")
-                        .font(EdenFont.ui(11)).foregroundStyle(EdenColor.n500)
+                        .font(EdenFont.ui(11)).foregroundStyle(EdenColor.textSecondary)
                 }
             }
         }

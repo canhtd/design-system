@@ -39,15 +39,15 @@ struct MetricList: View {
                   alignment: .leading, spacing: 8) {
             ForEach(metrics, id: \.0) { name, value in
                 HStack(spacing: 8) {
-                    Text(name).font(EdenFont.ui(12)).foregroundStyle(EdenColor.n700)
+                    Text(name).font(EdenFont.ui(12)).foregroundStyle(EdenColor.textControl)
                     Spacer(minLength: 8)
                     Text(String(format: "%g", value))
-                        .font(EdenFont.ui(12, .medium)).foregroundStyle(EdenColor.n900)
+                        .font(EdenFont.ui(12, .medium)).foregroundStyle(EdenColor.textStrong)
                 }
                 .padding(.horizontal, 10)
                 .frame(height: EdenMetric.rowHeight)
                 .background(EdenColor.card, in: .rect(cornerRadius: EdenRadius.md, style: .continuous))
-                .edenBorder(EdenColor.black(6), radius: EdenRadius.md)
+                .edenBorder(EdenColor.paneBorder, radius: EdenRadius.md)
             }
         }
     }
@@ -93,11 +93,11 @@ struct ChildRowSample: View {
                 ForEach(titles, id: \.self) { title in
                     Text(title)
                         .font(EdenFont.ui(14))
-                        .foregroundStyle(EdenColor.n600)
+                        .foregroundStyle(EdenColor.textControlQuiet)
                         .padding(.horizontal, 10)
                         .frame(height: EdenMetric.childRowHeight, alignment: .leading)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .background(title == titles.first ? EdenColor.black(4) : .clear,
+                        .background(title == titles.first ? EdenColor.ghostHoverFill : .clear,
                                     in: .rect(cornerRadius: EdenRadius.childRow, style: .continuous))
                 }
             }
@@ -112,7 +112,7 @@ struct SurfaceRow: View {
     var body: some View {
         HStack(spacing: 16) {
             surface("edenPanelShadow", fill: EdenColor.sidebar) { $0.edenPanelShadow() }
-            surface("edenFloatShadow", fill: EdenColor.white(80)) { $0.edenFloatShadow() }
+            surface("edenFloatShadow", fill: EdenColor.controlFill) { $0.edenFloatShadow() }
             surface("edenBorder(hairline)", fill: EdenColor.card) {
                 $0.edenBorder(EdenColor.hairline, radius: EdenRadius.card)
             }
@@ -137,7 +137,7 @@ struct SurfaceRow: View {
                     .fill(fill)
                     .frame(width: 180, height: 88)
             ))
-            Text(title).font(EdenFont.ui(11)).foregroundStyle(EdenColor.n500)
+            Text(title).font(EdenFont.ui(11)).foregroundStyle(EdenColor.textSecondary)
         }
     }
 }

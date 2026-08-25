@@ -36,12 +36,21 @@ extension View {
 /// The measured Eden doc says 8%/4%; 5.5%/3% is the tuned value, the one
 /// checked against the real app, so it is what ships.
 ///
-/// It is one wash for a whole window, not one per column: it multiplies over
-/// the sidebar panel as well as the canvas, so the ground reads as continuous
-/// and the strip of canvas around the panel does not sit lighter than the
-/// content beside it. Because it multiplies, it goes *over* the panel — a
-/// gradient behind an opaque fill shows nothing.
+/// It is one wash for a whole window, not one per column: it blends over the
+/// sidebar panel as well as the canvas, so the ground reads as continuous and
+/// the strip of canvas around the panel does not sit lighter than the content
+/// beside it. Because it blends, it goes *over* the panel — a gradient behind
+/// an opaque fill shows nothing.
+///
+/// Under dark the wash inverts: two faint *light* corners screened over the
+/// ground rather than two dark ones multiplied into it. Multiplying `#111` by
+/// black is the stain the spec rules out — it would only close the corners in.
+/// This is the one place the Appearance changes more than a value, so it is
+/// also the one view that reads `colorScheme`; the tokens it draws with still
+/// carry both halves themselves.
 public struct EdenPageGradient: View {
+    @Environment(\.colorScheme) private var colorScheme
+
     public init() {}
 
     public var body: some View {
@@ -53,7 +62,7 @@ public struct EdenPageGradient: View {
                                center: UnitPoint(x: 1.05, y: 1.08),
                                endRadiusFraction: 0.54)
         }
-        .blendMode(.multiply)
+        .blendMode(colorScheme == .dark ? .screen : .multiply)
         .allowsHitTesting(false)
     }
 }

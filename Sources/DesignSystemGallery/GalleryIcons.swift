@@ -14,19 +14,19 @@ public struct IconSheet: View {
             ForEach(EdenIcon.allCases, id: \.self) { icon in
                 VStack(spacing: 8) {
                     EdenIconView(icon, size: 64)
-                        .foregroundStyle(EdenColor.n800)
+                        .foregroundStyle(EdenColor.textSelected)
                     EdenIconView(icon, size: EdenIconSize.child)
-                        .foregroundStyle(EdenColor.n600)
+                        .foregroundStyle(EdenColor.textControlQuiet)
                     Text(icon.rawValue)
                         .font(EdenFont.ui(10))
-                        .foregroundStyle(EdenColor.n400)
+                        .foregroundStyle(EdenColor.textTertiary)
                         .lineLimit(1)
                         .minimumScaleFactor(0.7)
                 }
                 .padding(10)
                 .frame(maxWidth: .infinity)
                 .background(EdenColor.card, in: .rect(cornerRadius: EdenRadius.md, style: .continuous))
-                .edenBorder(EdenColor.black(6), radius: EdenRadius.md)
+                .edenBorder(EdenColor.paneBorder, radius: EdenRadius.md)
             }
         }
     }

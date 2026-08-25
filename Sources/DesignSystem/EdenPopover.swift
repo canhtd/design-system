@@ -1,9 +1,9 @@
 import SwiftUI
 
-/// The surface every floating menu in Eden is drawn on: r12, **opaque** white,
-/// a 1 pt `hairline` border, the float shadow, and 4 pt of padding around its
-/// rows. No callout tail — Eden's popovers are panels anchored to a control,
-/// not speech bubbles pointing at it.
+/// The surface every floating menu in Eden is drawn on: r12, an **opaque**
+/// `menuSurface`, a 1 pt `hairline` border, the float shadow, and 4 pt of
+/// padding around its rows. No callout tail — Eden's popovers are panels
+/// anchored to a control, not speech bubbles pointing at it.
 ///
 /// It is a plain container rather than a presentation modifier on purpose: the
 /// host app decides where it hangs and what closes it, and a system popover
@@ -24,7 +24,7 @@ public struct EdenPopover<Content: View>: View {
         VStack(alignment: .leading, spacing: 0) { content }
             .padding(EdenMetric.popoverPadding)
             .frame(width: width, alignment: .leading)
-            .background(EdenColor.card,
+            .background(EdenColor.menuSurface,
                         in: .rect(cornerRadius: EdenRadius.md, style: .continuous))
             .edenBorder(EdenColor.hairline, radius: EdenRadius.md)
             .edenFloatShadow()
