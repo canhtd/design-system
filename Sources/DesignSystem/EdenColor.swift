@@ -84,10 +84,17 @@ public enum EdenColor {
 
     // MARK: Destructive
     /// `--danger` — the one destructive colour: a `Delete…` row, a confirm
-    /// sheet's committing button. Light is derived (round 7); dark is
-    /// `--color-text-dark-error`, which is a *light* red, so what sits on it
-    /// is `textInverse` rather than white.
-    public static let danger = dual(light: 0xB42318, dark: 0xE5737A)
+    /// sheet's committing button. It is used as a **fill**, with white ink on
+    /// it, and both halves are derived on that basis.
+    ///
+    /// Eden's `--color-text-dark-error` `#E5737A` is deliberately *not* used
+    /// here: it is a text colour, and white on it is 2.4:1. The dark half is
+    /// the light red lifted just far enough to separate from the ground it
+    /// sits on — white ink 4.97:1, and 3.80:1 on `canvas` / 3.43:1 on `card`,
+    /// so the button reads as a button. If a call site ever needs destructive
+    /// *text*, that is a second role and `#E5737A` is the measured value for
+    /// it; nothing needs it today.
+    public static let danger = dual(light: 0xB42318, dark: 0xCC3B2C)
 
     // MARK: Palette helpers
     /// Eden's warm ink — `rgba(70,60,45,a)`, what the chat's own surfaces are

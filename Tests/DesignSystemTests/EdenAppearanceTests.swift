@@ -48,7 +48,7 @@ final class EdenAppearanceTests: XCTestCase {
         assertPair(EdenColor.statusDone, 0x007A55, 0x34C88F)
         assertPair(EdenColor.statusDoneTint, 0x00BC7D, 0x00C98A,
                    lightAlpha: 0.09, darkAlpha: 0.14)
-        assertPair(EdenColor.danger, 0xB42318, 0xE5737A)
+        assertPair(EdenColor.danger, 0xB42318, 0xCC3B2C)
     }
 
     func testInk() {
@@ -59,7 +59,7 @@ final class EdenAppearanceTests: XCTestCase {
         assertPair(EdenColor.textSecondary, 0x737373, 0x919191)
         assertPair(EdenColor.textTertiary, 0xA1A1A1, 0x6E6E6E)
         assertPair(EdenColor.textFaint, 0xD4D4D4, 0x4D4D4D)
-        assertPair(EdenColor.textInverse, 0xFFFFFF, 0x111111)
+        assertPair(EdenColor.textInverse, 0xFFFFFF, 0xFFFFFF)
     }
 
     /// The ramp stays a light-only palette: it is what the ink roles are cut

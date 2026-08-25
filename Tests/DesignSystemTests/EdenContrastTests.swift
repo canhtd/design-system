@@ -38,17 +38,29 @@ final class EdenContrastTests: XCTestCase {
         }
     }
 
-    /// A filled button carries its own ink, and `danger` is a *light* red
-    /// under dark — which is why `textInverse` inverts rather than staying
-    /// white.
+    /// A filled button carries its own ink.
     func testFilledButtonsCarryTheirOwnInk() {
         for appearance in [EdenTestAppearance.light, .dark] {
             assertReadable(EdenColor.primary5, on: EdenColor.primary80, appearance,
                            "primary5 on primary80")
             assertReadable(EdenColor.textInverse, on: EdenColor.danger, appearance,
                            "textInverse on danger")
-            assertReadable(EdenColor.danger, on: EdenColor.canvas, appearance,
-                           "danger as text on canvas")
+        }
+    }
+
+    /// `danger` is a fill, not a text colour, so it is held to the 3:1 floor
+    /// for a UI component against its ground rather than to the text floor:
+    /// the destructive button has to read as a button on both surfaces it can
+    /// sit on. Its ink is held to the text floor above, which is what keeps
+    /// the fill from drifting light.
+    func testTheDestructiveFillReadsAsAButtonOnBothGrounds() {
+        for appearance in [EdenTestAppearance.light, .dark] {
+            for (name, ground) in [("canvas", EdenColor.canvas), ("card", EdenColor.card)] {
+                let ratio = contrast(EdenColor.danger, on: ground, appearance)
+                XCTAssertGreaterThanOrEqual(ratio, 3, String(
+                    format: "danger on %@ under %@ is %.2f:1", name,
+                    appearance == .dark ? "dark" : "light", ratio))
+            }
         }
     }
 

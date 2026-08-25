@@ -54,8 +54,9 @@ extension EdenColor {
     public static let textFaint = dual(light: 0xD4D4D4, dark: 0x4D4D4D)
 
     /// The ink on a filled, saturated button: the destructive `Delete` on
-    /// `danger`. It inverts with the Appearance, because `danger` does: white
-    /// on the deep light red, near-black on the light red Eden uses under
-    /// dark. The filled primary button has its own measured `primary5`.
-    public static let textInverse = dual(light: 0xFFFFFF, dark: 0x111111)
+    /// `danger`. White in both Appearances — `danger` is a fill that stays
+    /// dark enough to carry white ink, rather than a light red that would
+    /// force the ink to invert with it. The filled primary button has its own
+    /// measured `primary5`.
+    public static let textInverse = hex(0xFFFFFF)
 }
