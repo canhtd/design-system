@@ -18,7 +18,8 @@ final class EdenSemanticTokenGuardTests: XCTestCase {
         "EdenColorInk.swift",       // the ink roles
         "EdenColorControl.swift",   // fills, edges, lifts, washes
         "EdenColorBoard.swift",     // the Board, the Chat turn, the rules
-        "EdenSignalColor.swift"     // the two signal ladders' measured hues
+        "EdenSignalColor.swift",    // the two signal ladders' measured hues
+        "EdenCard.swift"            // a card on a Board: its edge, ink and lift
     ]
 
     private static let forbidden: [(what: String, pattern: String)] = [

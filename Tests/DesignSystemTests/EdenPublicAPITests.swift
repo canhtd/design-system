@@ -31,6 +31,33 @@ final class EdenPublicAPITests: XCTestCase {
         _ = Color.clear.edenFloatShadow()
         _ = Color.clear.edenBorder(EdenColor.hairline, radius: EdenRadius.card)
         _ = Color.clear.edenPaneSurface()
+        _ = Color.clear.edenCardShadow(EdenCard.shadowRest)
+        _ = Color.clear.edenCardShadow(EdenCard.shadowFocused)
         _ = Text("All items").edenText(EdenType.pageTitle)
+    }
+
+    /// The roles v0.3.1 adds. A consumer reaching one of these is the whole
+    /// point of the release — VessaStudio's 46 near-miss call sites move onto
+    /// them, so a name that is not public is a name that changes nothing.
+    func testTheStudioRolesAreReachableFromOutsideTheModule() {
+        let roles: [Color] = [
+            EdenColor.ruleFaint, EdenColor.inputFieldFill, EdenColor.inputFieldBorder,
+            EdenColor.composerFill, EdenColor.cardHoverBorder, EdenColor.chipHoverBorder,
+            EdenColor.plateFill, EdenColor.sheetFooterFill, EdenColor.onPrimaryInk
+        ]
+        XCTAssertEqual(roles.count, 9)
+    }
+
+    /// And the card's own namespace: its colours, its geometry, its faces and
+    /// the two lifts.
+    func testTheCardTokensAreReachableFromOutsideTheModule() {
+        _ = EdenCard.borderWarm
+        _ = EdenCard.ink
+        _ = EdenCard.hint
+        _ = EdenCard.shadowLayer(0.024)
+        _ = [EdenCard.radius, EdenCard.paddingTop, EdenCard.paddingH,
+             EdenCard.paddingBottom, EdenCard.composerPaddingBottom]
+        _ = [EdenCard.text, EdenCard.editorText, EdenCard.hintText]
+        _ = [EdenCard.shadowRest, EdenCard.shadowFocused].map(\.layers)
     }
 }

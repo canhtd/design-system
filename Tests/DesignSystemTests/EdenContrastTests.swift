@@ -45,6 +45,34 @@ final class EdenContrastTests: XCTestCase {
                            "primary5 on primary80")
             assertReadable(EdenColor.textInverse, on: EdenColor.danger, appearance,
                            "textInverse on danger")
+            assertReadable(EdenColor.onPrimaryInk, on: EdenColor.primary80, appearance,
+                           "onPrimaryInk on primary80")
+        }
+    }
+
+    /// `onPrimaryInk` belongs on `primary80`, the filled-control background,
+    /// and never on `primary`, the bare accent. Under light the accent is the
+    /// deep `#09321F` and white sits happily on it; under dark it is the
+    /// lifted `#73B490`, where white is 2.4:1. The role is white in both
+    /// Appearances, so the ground is what has to be right — this pins the
+    /// mistake rather than leaving it to be made once per app.
+    func testTheInkOnAFilledControlIsNotForTheBareAccent() {
+        XCTAssertLessThan(contrast(EdenColor.onPrimaryInk, on: EdenColor.primary, .dark),
+                          Self.floor,
+                          "if this ever clears the floor, the warning above is stale")
+        XCTAssertGreaterThanOrEqual(
+            contrast(EdenColor.onPrimaryInk, on: EdenColor.primary80, .dark), Self.floor)
+    }
+
+    /// A card is text and nothing else, so its own ink is the one thing that
+    /// has to survive the port. `card` is the surface `EdenCard` is drawn on;
+    /// `canvas` is checked too, because a Board's composer sits straight on
+    /// the page before it is saved.
+    func testTheCardsInkClearsTheFloorOnItsOwnSurface() {
+        for appearance in [EdenTestAppearance.light, .dark] {
+            assertReadable(EdenCard.ink, on: EdenColor.card, appearance, "EdenCard.ink on card")
+            assertReadable(EdenCard.ink, on: EdenColor.canvas, appearance,
+                           "EdenCard.ink on canvas")
         }
     }
 
