@@ -59,4 +59,18 @@ extension EdenColor {
     /// force the ink to invert with it. The filled primary button has its own
     /// measured `primary5`.
     public static let textInverse = hex(0xFFFFFF)
+
+    /// The ink drawn *on* a filled primary control: the checkmark inside a
+    /// ticked checkbox. White in both Appearances, and a pair on purpose — it
+    /// says the dark half was decided rather than left behind.
+    ///
+    /// Not `primary5`, which is a surface tint and only looks right because
+    /// `#EFF2EE` is nearly white; and not `textInverse`, which is the ink on
+    /// `danger`. The two share a value today and answer to different fills:
+    /// if the fill under this one ever lightens, this is the role that moves.
+    ///
+    /// The fill is `primary80`, never `primary`. The bare accent is the deep
+    /// `#09321F` under light but the lifted `#73B490` under dark, where white
+    /// on it is 2.4:1 — `EdenContrastTests` pins both halves of that.
+    public static let onPrimaryInk = dual(light: 0xFFFFFF, dark: 0xFFFFFF)
 }

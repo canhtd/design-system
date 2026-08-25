@@ -33,12 +33,27 @@ extension EdenColor {
     /// `Cancel`.
     public static let ghostHoverFill = dual(light: black(4), dark: white(7))
 
+    /// A card's edge under the pointer. `controlBorderHover` is a *control's*,
+    /// and two points too quiet for a card that lifts a shadow at the same
+    /// time — the edge has to keep up with the lift or the card reads as
+    /// floating away from its own outline.
+    ///
+    /// Derived, between two measured Eden hover edges: a ghost control firms
+    /// to `#FFFFFF24` (white 14 %) and a chip to `#FFFFFF29` (white 16 %), and
+    /// a card takes the step above both.
+    public static let cardHoverBorder = dual(light: black(12), dark: white(18))
+
     /// The filter chip that is on. `card`'s white under light; under dark it
     /// takes `--color-background-field` rather than the card, because it has
     /// to lift off the canvas, not match a card.
     public static let chipActiveFill = dual(light: white(100), dark: hex(0x2A2A2A))
     /// That chip's edge — the firmest edge in the filter row.
     public static let chipActiveBorder = dual(light: black(15), dark: white(20))
+    /// A chip or capsule under the pointer, one step above `chipActiveBorder`'s
+    /// resting edge. Derived: Eden's own chip firms its dark edge on hover
+    /// (`#FFFFFF1A` → `#FFFFFF29`), and this keeps the same proportion over
+    /// the louder edge Studio's chip rests on.
+    public static let chipHoverBorder = dual(light: black(17), dark: white(24))
 
     /// The track a segmented control sits in.
     public static let segmentTrackFill = dual(light: black(1.8), dark: white(4))
@@ -46,12 +61,23 @@ extension EdenColor {
     public static let segmentTrackBorder = dual(light: black(6.5), dark: white(9))
     /// The chosen segment's own capsule inside that track.
     public static let segmentSelectedFill = dual(light: black(5.5), dark: white(10))
+    /// The barely-there wash under a sheet's or a command palette's footer —
+    /// a change of ground, not a fill. Quieter than `segmentTrackFill`, which
+    /// is already the quietest track in the package. Derived at the step under
+    /// it, the place its light half holds under `black(1.8)`.
+    public static let sheetFooterFill = dual(light: black(1.2), dark: white(3))
 
     /// The plate under a `⌘ K` keycap.
     public static let keycapFill = dual(light: black(5), dark: white(8))
     /// The square a `mono20` monogram's initial sits on. The small monogram is
     /// tinted with `primaryTint` instead.
     public static let monogramFill = dual(light: black(6), dark: white(9))
+    /// The plate behind a monogram in a sidebar row, or behind a toolbar glyph
+    /// that is on. One point over `monogramFill`, which is the avatar case:
+    /// these sit on `sidebar` rather than on `canvas`, and the ground has
+    /// already taken the first point away. Derived at the same one-step
+    /// distance its light half keeps over `black(6)`.
+    public static let plateFill = dual(light: black(7), dark: white(11))
     /// The 1 pt lift under a raised control — the current glyph in the
     /// deprecated `EdenViewModes`. Deeper under dark, where a 8 % shadow on a
     /// dark ground is not a lift at all.
@@ -65,6 +91,40 @@ extension EdenColor {
     /// These two are 33 levels apart. Light is unchanged.
     public static let viewModeTrackFill = dual(light: black(5), dark: white(4))
     public static let viewModeSelectedFill = dual(light: white(100), dark: white(18))
+
+    // MARK: The well a person types into
+
+    /// The Chat composer's own plate: the thing the page wash reads *through*,
+    /// which is why it is lighter than `controlFill` rather than equal to it.
+    ///
+    /// Derived. Under light it sits between the segmented track and
+    /// `controlFill`'s `white(80)`; under dark it keeps that place, above
+    /// `inputFieldFill`'s well and below `controlFill`'s pill. The composer is
+    /// the one surface where both roles are on screen at once, and this is the
+    /// pair that keeps the well reading as recessed into the plate.
+    public static let composerFill = dual(light: white(60), dark: white(8))
+
+    /// The well itself — a composer's text area, a tag field. Deeper than
+    /// `segmentTrackFill`, which is chrome; shallower than the plate it is cut
+    /// into.
+    ///
+    /// Derived, and deliberately not Eden's `--color-background-field`
+    /// (`#2A2A2A`, white 10.5 % over the canvas — what `chipActiveFill` takes):
+    /// that is a field which *replaces* the ground it sits on. This one is
+    /// recessed into `composerFill`, so it has to stay under it. Eden's own
+    /// field frame agrees on the direction — its neutral fill measures
+    /// `black(3.9)` under light and only `white(2.4)` under dark — but it is
+    /// read on the editor's much lighter `#262626`, not on `canvas`.
+    public static let inputFieldFill = dual(light: black(3), dark: white(5))
+
+    /// That well's edge, one point firmer than a control's: a field holds text
+    /// a person has typed, and its outline has to survive being filled.
+    ///
+    /// Derived, between the two measured Eden edges it has to sit inside —
+    /// `--color-divider` (white 10 %, which `controlBorder` takes) and
+    /// `--color-border-subtle` (`#2F2F2F`, white 13 % over the canvas, which
+    /// `hairline` takes).
+    public static let inputFieldBorder = dual(light: black(8), dark: white(11))
 
     // MARK: Surfaces a view paints
 

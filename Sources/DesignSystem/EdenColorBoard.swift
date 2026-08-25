@@ -70,6 +70,20 @@ extension EdenColor {
 
     // MARK: - Rules
 
+    /// A 1 pt rule or divider drawn *inside* a surface: the line under a
+    /// command palette's search field, a sheet's footer rule, the line above
+    /// the sidebar's foot. Distinct from `paneBorder`, which edges a whole
+    /// pane — a full-width hairline at `paneBorder`'s `white(9)` stops reading
+    /// as a separation under dark and starts reading as a bar.
+    ///
+    /// Measured: `--color-neutral-dark-10`, `#FFFFFF14`. Eden splits one light
+    /// value into two dark ones — under light this variable and
+    /// `--color-divider` are both `#2725231A`, and under dark the divider goes
+    /// to white 10 % while this stays at 8 %. That split is exactly the
+    /// distinction the role is for, so the value is Eden's own rather than a
+    /// step invented under `paneBorder`.
+    public static let ruleFaint = dual(light: black(6), dark: white(8))
+
     /// The 1 px vertical rail drawn beside a sidebar group's child rows.
     /// `black/9%` under light, so it reads on `sidebar` without becoming a
     /// border; white 12 % under dark, where black would vanish.
