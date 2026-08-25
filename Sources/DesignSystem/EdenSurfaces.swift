@@ -3,20 +3,20 @@ import SwiftUI
 extension View {
     /// `shadow-sm` — the sidebar panel.
     public func edenPanelShadow() -> some View {
-        shadow(color: EdenColor.black(10), radius: 1.5, y: 1)
+        shadow(color: EdenColor.panelShadow, radius: 1.5, y: 1)
     }
 
     /// The floating-chrome shadow Eden puts under modals and toolbars.
     public func edenFloatShadow(opacity: Double = 8) -> some View {
-        shadow(color: EdenColor.black(opacity), radius: 30, y: 22)
+        shadow(color: EdenColor.floatShadow(opacity), radius: 30, y: 22)
     }
 
     /// The inset card a Board, a Chat or a split column sits on: r12, a 1 pt
-    /// `black(6)` edge, and its content clipped to that shape (`proto .pane`).
+    /// `paneBorder` edge, and its content clipped to that shape (`proto .pane`).
     /// The gap around it belongs to the container, not to the pane.
     public func edenPaneSurface() -> some View {
         clipShape(.rect(cornerRadius: EdenRadius.md, style: .continuous))
-            .edenBorder(EdenColor.black(6), radius: EdenRadius.md)
+            .edenBorder(EdenColor.paneBorder, radius: EdenRadius.md)
     }
 
     /// A 1 pt inside border, the way CSS `border` paints it.
@@ -46,10 +46,10 @@ public struct EdenPageGradient: View {
 
     public var body: some View {
         ZStack {
-            EllipticalGradient(colors: [EdenColor.black(5.5), .clear],
+            EllipticalGradient(colors: [EdenColor.pageWashTop, .clear],
                                center: UnitPoint(x: 0.08, y: -0.1),
                                endRadiusFraction: 0.72)
-            EllipticalGradient(colors: [EdenColor.black(3), .clear],
+            EllipticalGradient(colors: [EdenColor.pageWashBottom, .clear],
                                center: UnitPoint(x: 1.05, y: 1.08),
                                endRadiusFraction: 0.54)
         }

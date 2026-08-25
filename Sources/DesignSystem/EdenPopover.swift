@@ -45,7 +45,7 @@ public struct EdenPopoverHeader<Trailing: View>: View {
         HStack(alignment: .firstTextBaseline, spacing: 8) {
             Text(title)
                 .edenText(EdenType.chip)
-                .foregroundStyle(EdenColor.n500)
+                .foregroundStyle(EdenColor.textSecondary)
             Spacer(minLength: 8)
             trailing
         }

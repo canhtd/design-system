@@ -14,7 +14,7 @@ public enum EdenSignal {
 
     /// `< 2×` is the one rung drawn in neutral ink rather than a hue: it is the
     /// absence of a signal, so it must not read as one.
-    public static let outlierBase = Band(hue: EdenColor.black(55))
+    public static let outlierBase = Band(hue: EdenColor.signalNone)
 
     /// An Item's views over its author's followers.
     public static func outlier(_ multiple: Double) -> Band {
@@ -41,6 +41,6 @@ public enum EdenSignal {
 }
 
 extension EdenSignal.Band {
-    /// `< 2×`'s border is black 10 %, not the shared 25 % derivation.
-    public var outlierBaseBorder: Color { EdenColor.black(10) }
+    /// `< 2×`'s border is `signalNoneBorder`, not the shared 25 % derivation.
+    public var outlierBaseBorder: Color { EdenColor.signalNoneBorder }
 }

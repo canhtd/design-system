@@ -1,10 +1,10 @@
 import SwiftUI
 
-/// The `⌘ K` keycaps in the Create-or-search pill: 15 pt square, r4,
-/// `black/5%`, 10/500 `#737373`.
+/// The `⌘ K` keycaps in the Create-or-search pill: 15 pt square, r4, a
+/// `keycapFill` plate under 10/500 `textSecondary`.
 public struct EdenKbd: View {
     /// How loud the keycap is. A row that is not here yet still shows the
-    /// letter it will answer to, in `n300` — the plate keeps its strength, so
+    /// letter it will answer to, in `textFaint` — the plate keeps its strength, so
     /// the row reads as waiting rather than as faded out
     /// (`proto .ck-row.off .mkbd`).
     public enum Tone {
@@ -12,8 +12,8 @@ public struct EdenKbd: View {
 
         var letter: Color {
             switch self {
-            case .normal: EdenColor.n500
-            case .quiet: EdenColor.n300
+            case .normal: EdenColor.textSecondary
+            case .quiet: EdenColor.textFaint
             }
         }
     }
@@ -34,7 +34,7 @@ public struct EdenKbd: View {
                     .foregroundStyle(tone.letter)
                     .frame(minWidth: 15, minHeight: 15)
                     .padding(.horizontal, 2)
-                    .background(EdenColor.black(5), in: .rect(cornerRadius: 4))
+                    .background(EdenColor.keycapFill, in: .rect(cornerRadius: 4))
             }
         }
     }
@@ -46,7 +46,7 @@ public struct EdenMonogram: View {
     /// fill are part of the variant, so a caller only picks the slot.
     public enum Size {
         /// The account row and a popover's header: 20 pt square, `EdenRadius.xs`,
-        /// `black/6%`, 10/600 `n700`, initial in caps.
+        /// `monogramFill`, 10/600 `textControl`, initial in caps.
         case mono20
         /// The small monogram: 18 pt square, `EdenRadius.mono`, `primaryTint`
         /// behind 9.5/600 `primary`, initial in lower case.
@@ -59,8 +59,8 @@ public struct EdenMonogram: View {
         var side: CGFloat { self == .mono18 ? EdenMetric.mono18 : EdenMetric.iconSlot }
         var radius: CGFloat { self == .mono18 ? EdenRadius.mono : EdenRadius.xs }
         var font: Font { EdenFont.ui(self == .mono18 ? 9.5 : 10, .semibold) }
-        var foreground: Color { self == .mono18 ? EdenColor.primary : EdenColor.n700 }
-        var fill: Color { self == .mono18 ? EdenColor.primaryTint : EdenColor.black(6) }
+        var foreground: Color { self == .mono18 ? EdenColor.primary : EdenColor.textControl }
+        var fill: Color { self == .mono18 ? EdenColor.primaryTint : EdenColor.monogramFill }
     }
 
     public let text: String
@@ -111,11 +111,11 @@ public struct EdenFilterChip: View {
                 }
             }
         }
-        .foregroundStyle(isActive ? EdenColor.n900 : EdenColor.n500)
+        .foregroundStyle(isActive ? EdenColor.textStrong : EdenColor.textSecondary)
         .padding(.horizontal, isCompact ? 8 : 10)
         .frame(height: EdenMetric.pillHeight)
-        .background(isActive ? Color.white : .clear, in: .capsule)
-        .overlay(Capsule().strokeBorder(isActive ? EdenColor.black(15) : .clear))
+        .background(isActive ? EdenColor.chipActiveFill : .clear, in: .capsule)
+        .overlay(Capsule().strokeBorder(isActive ? EdenColor.chipActiveBorder : .clear))
         .accessibilityLabel(title)
     }
 }
@@ -137,17 +137,19 @@ public struct EdenSegmented: View {
                 Text(title)
                     .edenText(EdenType.chip)
                     .fixedSize()
-                    .foregroundStyle(index == selected ? EdenColor.n800 : EdenColor.n500)
+                    .foregroundStyle(index == selected ? EdenColor.textSelected
+                                                      : EdenColor.textSecondary)
                     .padding(.horizontal, 10)
                     .frame(height: EdenMetric.segmentedHeight - 4)
-                    .background(index == selected ? EdenColor.black(5.5) : .clear, in: .capsule)
+                    .background(index == selected ? EdenColor.segmentSelectedFill : .clear,
+                                in: .capsule)
             }
         }
         .padding(2)
         .frame(height: EdenMetric.segmentedHeight)
         .fixedSize()
-        .background(EdenColor.black(1.8), in: .capsule)
-        .overlay(Capsule().strokeBorder(EdenColor.black(6.5)))
+        .background(EdenColor.segmentTrackFill, in: .capsule)
+        .overlay(Capsule().strokeBorder(EdenColor.segmentTrackBorder))
     }
 }
 
@@ -168,13 +170,16 @@ public struct EdenViewModes: View {
             ForEach(Array(symbols.enumerated()), id: \.offset) { index, symbol in
                 Image(systemName: symbol)
                     .font(EdenFont.ui(14))
-                    .foregroundStyle(index == selected ? EdenColor.n800 : EdenColor.n400)
+                    .foregroundStyle(index == selected ? EdenColor.textSelected
+                                                      : EdenColor.textTertiary)
                     .frame(width: 28, height: 24)
-                    .background(index == selected ? Color.white : .clear, in: .capsule)
-                    .shadow(color: index == selected ? EdenColor.black(8) : .clear, radius: 1, y: 1)
+                    .background(index == selected ? EdenColor.chipActiveFill : .clear,
+                                in: .capsule)
+                    .shadow(color: index == selected ? EdenColor.raisedShadow : .clear,
+                            radius: 1, y: 1)
             }
         }
         .padding(2)
-        .background(EdenColor.black(5), in: .capsule)
+        .background(EdenColor.keycapFill, in: .capsule)
     }
 }
