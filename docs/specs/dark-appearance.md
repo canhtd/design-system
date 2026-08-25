@@ -50,7 +50,11 @@ not measured, the executor derives it and says so in the doc comment.
 | text, tertiary (today `n400`) | `#A1A1A1` | derive between `#919191` and `#2F2F2F` (unmeasured) | — |
 | icon, secondary | — | `#C3C3C3` | `--color-icon-dark-secondary` |
 | hairline | `#E0E0E0` | `#2F2F2F` | `--color-border-subtle` |
-| divider | — | white 10 % | `--color-divider` |
+| divider | — | white 10 % (`#FFFFFF1A`) | `--color-divider` |
+| faint rule | — | white 8 % (`#FFFFFF14`) | `--color-neutral-dark-10` (added 0.3.1) |
+| highlight surface | `#F9F9F9` | `#1B1B1B` | `--surface-highlight` (added 0.3.1) |
+| field, hovered | `#E8E8E8` | `#222222` | `--color-background-field-hover` (added 0.3.1) |
+| field frame, neutral | fill `black(3.9)`, edge `black(9)`/`black(14.1)` | fill `white(2.4)`, edge `white(5.9)`/`white(10.2)` | `--field-hue-bg` / `--field-hue-border-soft` / `--field-hue-border-strong` at `[data-field-color=default]` (added 0.3.1) |
 | primary (accent) | `#09321F` | `#73B490` | `--color-primary` / `--color-eden-accent` |
 | primary80 (filled button bg) | `#224735` | `#395A4B` | `--color-button-primary-default-background` |
 | primary5 (text on filled button) | `#EFF2EE` | `#EFF2EE` | `--color-button-primary-default-text` |
@@ -59,6 +63,29 @@ not measured, the executor derives it and says so in the doc comment.
 | primaryTint | primary 9 % | `#73B490` at 15 % | `--color-background-primary-selected` |
 | danger | as today | `#E5737A` | `--color-text-dark-error` |
 | scrim, guideRail*, status*, chat*, followUp*, section hues, Band hues | as today | derive; every one legible on `#111`/`#1C1C1C` | accent set available: gooseberry `#D4A83A`, blueberry `#6E96B8`, acai `#9B8BB8`, strawberry `#C96A6A`, seed `#C9A68A`, stone `#A0A0A0`, vine `#5C8470` |
+
+### The 0.3.1 pass (2026-08-26)
+
+The rows marked *added 0.3.1* were read the same way, headlessly: app.eden.so
+loaded under an emulated `prefers-color-scheme: dark` and again under light,
+reading `getComputedStyle(document.documentElement)` for every custom property
+the page declares (319 of them), plus the app's own stylesheet rules for the
+components no signed-out page renders. No account was used.
+
+Two findings are worth keeping, because they are what a derived value would
+have got wrong:
+
+- **`--color-divider` and `--color-neutral-dark-10` are the same colour under
+  light** — both `#2725231A` — and split under dark, to white 10 % and white
+  8 %. Eden itself keeps two steps where light needs only one. That is exactly
+  the distinction `ruleFaint` was proposed for: a rule *inside* a surface has
+  to sit under the edge that bounds a pane, and Eden's own second step is the
+  value, rather than a step invented under `paneBorder`.
+- **Alpha does not scale in one direction.** The package's shipped pairs lift
+  black *n* to roughly white *1.4 n*, but Eden's field frame goes the other way
+  — `black(3.9)` to `white(2.4)` — because it is read on the editor's `#262626`
+  rather than on `#111`. A dark half is only meaningful with the ground it was
+  measured on, so `inputFieldFill` is derived rather than taking that number.
 
 Contrast floor still applies: text on canvas and on card ≥ 4.5:1 in both Appearances.
 

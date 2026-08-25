@@ -30,9 +30,22 @@ are measured off app.eden.so; where a role had no measurement its doc comment
 says it is derived. `swift run TokenGallery` has a System / Light / Dark switch
 for previewing both.
 
-**API:** `EdenColor`, `EdenFont`, `EdenRadius`, `EdenMetric`, `EdenPageGradient`,
-the `eden*` view modifiers, three button styles, five components.
-`swift run TokenGallery` renders every one of them in a window.
+**API:** `EdenColor`, `EdenFont`, `EdenRadius`, `EdenMetric`, `EdenCard`,
+`EdenPageGradient`, the `eden*` view modifiers, three button styles, five
+components. `swift run TokenGallery` renders every one of them in a window.
+
+**`EdenCard`** is a namespace of its own rather than members spread across
+`EdenColor`, `EdenRadius`, `EdenType` and `EdenMetric`: a card was measured as
+one thing on one live card, and an app that carries a local copy of those enums
+would shadow the package's and reach none of it. It holds the warm edge, the
+r14 box and its paddings, the 17/26 and 16/24 faces, the hint, and the two
+three-layer lifts cast by `edenCardShadow(_:)`.
+
+**Versions** are the git tags; there is no changelog. **0.3.1** added the nine
+roles VessaStudio's dark sweep had no name for — `ruleFaint`, `inputFieldFill`,
+`inputFieldBorder`, `composerFill`, `cardHoverBorder`, `chipHoverBorder`,
+`plateFill`, `sheetFooterFill`, `onPrimaryInk` — and brought `EdenCard` across
+from 0.2.17 with a second value for every colour it carries.
 
 **Open decision — the font:** Eden ships Geist; this package uses the system
 face (SF Pro) at Eden's px sizes (VessaStudio spec decision D3). Whether to
