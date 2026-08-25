@@ -50,6 +50,8 @@ public struct EdenTokenGallery: View {
             GallerySection("Icons — Tabler, 24 grid, stroke 1.7") { IconSheet() }
             GallerySection("Sidebar child rows") { ChildRowSample() }
             GallerySection("Surfaces") { SurfaceRow() }
+            GallerySection("Roles — v0.3.1") { StudioRoleRow() }
+            GallerySection("Card — EdenCard") { CardTokenRow() }
         }
         .padding(32)
         .frame(maxWidth: .infinity, alignment: .leading)
